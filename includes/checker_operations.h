@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 11:44:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/09 15:17:02 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/10 11:14:53 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,10 @@ void    reverse_rotate_b(void **stack_b);
 ** Call revserse_rotate_a and reverse_rotate_b at the same time.
 */
 void    reverse_rotate_rotate(void **stack_a, void **stack_b);
+
+/*
+** Will process the various operations on stacks.
+*/
+void	apply_operation(char *operation);
 
 #endif

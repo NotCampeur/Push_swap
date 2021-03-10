@@ -42,7 +42,13 @@ SRC 	=		ft_itoa_base.c ft_itoa.c ft_atoi.c ft_itoa_hexa.c ft_itoa_octa.c \
 OBJ		=		$(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 #Compilation flag
-CFLAGS	=		-Wall -Wextra -Werror $(ARG) -g3
+CFLAGS	=		-Wall -Wextra -Werror -g3
+
+#Will enable fsanitize if debug is define
+DEBUG =
+ifdef DEBUG
+    CFLAGS += -fsanitize=address
+endif
 
 #Include flag
 IFLAGS	=		$(foreach dir, $(INC_DIR), -I$(dir))
