@@ -23,6 +23,7 @@ SRC 	=		ft_itoa_base.c ft_itoa.c ft_atoi.c ft_itoa_hexa.c ft_itoa_octa.c \
 				ft_putchar.c ft_putchar_fd.c ft_putchar_fp.c \
 				ft_putstr.c ft_putstr_fd.c ft_putstr_fp.c \
 				ft_putnbr.c ft_putnbr_fd.c ft_putnbr_fp.c \
+				ft_list_print_str.c \
 				ft_print_str_tab.c ft_print_str_tab_fd.c ft_print_str_tab_fp.c\
 				ft_print_int_tab_fd.c ft_print_int_tab.c \
 				ft_error.c \

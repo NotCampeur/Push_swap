@@ -6,71 +6,86 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 11:51:21 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/10 16:18:36 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/11 16:36:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static void		quit(void **stack_a, void **stack_b)
+static void		quit(t_list_node *stack_a, t_list_node *stack_b, void **ops)
 {
-	free(stack_a);
-	free(stack_b);
+	ft_list_clear(&stack_a, NULL);
+	if (stack_b != NULL)
+		ft_list_clear(&stack_b, NULL);
+	ft_free_tab(ops);
 	exit(0);
 }
 
-static t_bool	resolution(void **stack_a, void **stack_b)
+static t_bool	resolution(t_list_node *stack_a, t_list_node *stack_b)
 {
-	int index;
-	int tab_len;
+	int stack_len;
 
-	index = 0;
-	tab_len = ft_tab_len(stack_a);
-	while (index < tab_len)
+	stack_len = ft_list_size(stack_a);
+	if (stack_b != NULL && ft_list_size(stack_b) != 0)
 	{
-		if (stack_b[index] != NULL)
-			return (false);
-		if (index < tab_len - 1
-			&& ft_atoi((stack_a[index])) >= ft_atoi((stack_a[index + 1])))
+		ft_putstr(FT_BOLD_RED"KO\n"FT_BASIC);
+		return (false);
+	}
+	while (stack_a->next != NULL)
+	{
+		if (ft_atoi((stack_a->data)) >= ft_atoi((stack_a->next->data)))
 		{
-			/* ft_putstr(FT_BOLD_RED"KO\n"FT_BASIC); */
+			ft_putstr(FT_BOLD_RED"KO\n"FT_BASIC);
 			return (false);
 		}
-		index++;
+		stack_a = stack_a->next;
 	}
 	ft_putstr(FT_BOLD_GREEN"OK\n"FT_BASIC);
 	return (true);
 }
 
+static void		**get_instructions()
+{
+	int		ret;
+	void	**operation;
+	char	*readed;
+	
+	ret = 3;
+	operation = ft_tab_new(0);
+	readed = ft_strnew(5);
+	while (ret > 2)
+	{
+		ret = read(STDIN_FILENO, readed, 4);
+		if (ret > 2)
+			ft_add_to_tab(ft_strdup(readed), &operation);
+	}
+	free(readed);
+	return (operation);
+}
+
 int				main(int argc, char *argv[])
 {
-	int		index;
-	void	**stack_a;
-	void	**stack_b;
-	char	*operation;
+	int			index;
+	t_list_node	*stack_a;
+	t_list_node	*stack_b;
+	void		**operations;
 
 	if (argc < 2)
-	{
-		ft_putstr_fd(2, FT_BOLD_RED"Error\nFT_REDArgument is missing"FT_BASIC);
 		return (1);
-	}
-	index = 1;
-	stack_a = ft_tab_new(argc - 1);
-	stack_b = ft_tab_new(argc - 1);
-	operation = ft_strnew(0);
+	index = 2;
+	stack_a = ft_malloc_node(argv[1]);
+	stack_b = NULL;
 	while (index < argc)
 	{
-		ft_add_to_tab(argv[index], &stack_a);
+		ft_list_add_back(&stack_a, ft_malloc_node(argv[index]));
 		index++;
 	}
-	while (resolution(stack_a, stack_b) == false)
-	{
-		ft_print_str_tab("Stack A", (char**)stack_a);
-		ft_print_str_tab("Stack B", (char**)stack_b);
-		ft_get_next_line(0, &operation);
-		apply_operation(operation);
-		free(operation);
-	}
-	quit(stack_a, stack_b);
+	ft_list_print_str(stack_a);
+	operations = get_instructions();
+	ft_print_str_tab("Operations", (char **)operations);
+	apply_operation((char**)operations, stack_a, stack_b);
+	ft_list_print_str(stack_a);
+	resolution(stack_a, stack_b);
+	quit(stack_a, stack_b, operations);
 	return (0);
 }

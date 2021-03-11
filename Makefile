@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:13:40 by ldutriez          #+#    #+#              #
-#    Updated: 2021/03/10 16:17:25 by ldutriez         ###   ########.fr        #
+#    Updated: 2021/03/11 16:04:16 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ LIB = ft
 
 # SRC = $(foreach dir, $(SRCS_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 
-CHECKER_SRC	=	checker_main.c apply_operation.c
+CHECKER_SRC	=	checker_main.c \
+				apply_operation.c swap.c push.c rotate.c reverse_rotate.c
+				
 PUSH_SWAP_SRC =	push_swap_main.c
 
 # OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
@@ -92,13 +94,13 @@ re-install:
 $(PUSH_SWAP_OBJ_DIR)/%.o : %.c
 				@echo -n "Compiling $(_YELLOW)$@$(_WHITE) ... "
 				@mkdir -p $(PUSH_SWAP_OBJ_DIR)
-				$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
+				@$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
 				@echo "$(_GREEN)DONE$(_WHITE)"
 
 $(CHECKER_OBJ_DIR)/%.o : %.c
 				@echo -n "Compiling $(_YELLOW)$@$(_WHITE) ... "
 				@mkdir -p $(CHECKER_OBJ_DIR)
-				$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
+				@$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
 				@echo "$(_GREEN)DONE$(_WHITE)"
 
 $(NAME1): 		libft/libft.a $(INC_DIR) $(PUSH_SWAP_OBJ) Makefile
@@ -108,7 +110,7 @@ $(NAME1): 		libft/libft.a $(INC_DIR) $(PUSH_SWAP_OBJ) Makefile
 
 $(NAME2): 		libft/libft.a $(INC_DIR) $(CHECKER_OBJ) Makefile
 				@echo -n "-----\nCreating Executable $(_YELLOW)$@$(_WHITE) ... "
-				$(CC) $(CFLAGS) $(CHECKER_OBJ) $(LFLAGS) -o $(NAME2)
+				@$(CC) $(CFLAGS) $(CHECKER_OBJ) $(LFLAGS) -o $(NAME2)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
 norme:

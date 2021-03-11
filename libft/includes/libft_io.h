@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 15:15:30 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/10/23 15:03:06 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/11 14:08:05 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void			ft_putstr_fp(char *path, char *str, char *mode);
 void			ft_putnbr(int nb);
 void			ft_putnbr_fd(int fd, int nb);
 void			ft_putnbr_fp(char *path, int nb, char *mode);
+void			ft_list_print_str();
 void			ft_print_str_tab(char *name, char **tab);
 void			ft_print_str_tab_fd(int fd, char *name, char **tab);
 void			ft_print_str_tab_fp(char *path,
