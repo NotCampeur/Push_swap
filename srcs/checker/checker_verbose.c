@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_print_str.c                                :+:      :+:    :+:   */
+/*   checker_verbose.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 14:06:07 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/11 14:14:00 by ldutriez         ###   ########.fr       */
+/*   Created: 2021/03/15 14:31:11 by ldutriez          #+#    #+#             */
+/*   Updated: 2021/03/15 14:47:05 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_putstr_void(void *str)
+void	start_debug(void **operations, t_list_node *stack_a)
 {
-	ft_putstr((char*)str);
-	ft_putchar('\n');
-}
-
-void	ft_list_print_str(t_list_node *list)
-{
-	ft_list_iter(list, ft_putstr_void);
+	ft_putstr_fp("log.log", "The start stack\n", "OVERWRITE");
+	ft_list_putstr_fp("log.log", "STACK A", stack_a, "APPEND");
+	ft_putstr_tab_fp("log.log", "Ops sent", (char **)operations, "APPEND");
+	ft_putstr_fp("log.log", "Applying operations\n", "APPEND");
 }

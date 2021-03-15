@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 21:11:20 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/10/23 13:35:12 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:36:27 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	print_offset(size_t nbr)
 
 /*
 **	Printing a 2 dimensions characters array. Note that user can
-**	define a name for the array. Otherwise, set NULL as the second parameter.
+**	define a name for the array. Otherwise, set NULL as the first parameter.
 */
 
-void		ft_print_str_tab(char *name, char **tab)
+void		ft_putstr_tab(char *name, char **tab)
 {
 	size_t		index;
 	size_t		line_offset;

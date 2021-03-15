@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:13:40 by ldutriez          #+#    #+#              #
-#    Updated: 2021/03/11 16:04:16 by ldutriez         ###   ########.fr        #
+#    Updated: 2021/03/15 14:52:14 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,9 @@ LIB = ft
 # SRC = $(foreach dir, $(SRCS_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 
 CHECKER_SRC	=	checker_main.c \
-				apply_operation.c swap.c push.c rotate.c reverse_rotate.c
+				apply_operation.c swap.c push.c rotate.c reverse_rotate.c \
+				checker_engine.c \
+				checker_verbose.c
 				
 PUSH_SWAP_SRC =	push_swap_main.c
 
@@ -125,7 +127,7 @@ sort: 			$(NAME1)
 
 check:			$(NAME2)
 				@echo "Launch Binary File $(_BLUE)$(NAME2)$(_WHITE)\n-----"
-				@./$(NAME2) $(ARGS)
+				@./$(NAME2) "$(ARGS)"
 				@echo "-----\n$(_BLUE)$(NAME2) $(_GREEN)successfully end$(_WHITE)\n-----"
 
 clean:

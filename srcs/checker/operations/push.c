@@ -6,33 +6,34 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:52:06 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/11 16:31:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/15 14:42:53 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "checker.h"
 
-void    push_a(t_list_node *stack_a, t_list_node *stack_b)
+void	push_a(t_list_node **stack_a, t_list_node **stack_b)
 {
 	t_list_node *tmp;
 
-	tmp = stack_b;
-	if (ft_list_size(stack_b) > 0)
+	tmp = *stack_b;
+	if (ft_list_size(*stack_b) > 0)
 	{
-		stack_b = stack_b->next;
-		ft_list_add_front(&stack_a, tmp);
+		*stack_b = (*stack_b)->next;
+		tmp->next = NULL;
+		ft_list_add_front(stack_a, tmp);
 	}
 }
 
-void    push_b(t_list_node *stack_a, t_list_node *stack_b)
+void	push_b(t_list_node **stack_a, t_list_node **stack_b)
 {
 	t_list_node *tmp;
 
-	tmp = stack_a;
-	if (ft_list_size(stack_a) > 0)
+	tmp = *stack_a;
+	if (ft_list_size(*stack_a) > 0)
 	{
-		stack_a = stack_a->next;
-		ft_list_add_front(&stack_b, tmp);
+		*stack_a = (*stack_a)->next;
+		tmp->next = NULL;
+		ft_list_add_front(stack_b, tmp);
 	}
 }

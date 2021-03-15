@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str_tab_fd.c                              :+:      :+:    :+:   */
+/*   ft_putstr_tab_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 15:01:04 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/10/23 13:30:05 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:37:39 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **	define a name for the array. Otherwise, set NULL as the second parameter.
 */
 
-void	ft_print_str_tab_fd(int fd, char *name, char **tab)
+void	ft_putstr_tab_fd(int fd, char *name, char **tab)
 {
 	size_t	index;
 
