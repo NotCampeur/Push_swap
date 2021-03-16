@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:52:06 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/15 14:42:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/16 15:48:03 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	push_a(t_list_node **stack_a, t_list_node **stack_b)
 	t_list_node *tmp;
 
 	tmp = *stack_b;
-	if (ft_list_size(*stack_b) > 0)
+	if (*stack_b != NULL && ft_list_size(*stack_b) > 0)
 	{
 		*stack_b = (*stack_b)->next;
 		tmp->next = NULL;
@@ -30,7 +30,7 @@ void	push_b(t_list_node **stack_a, t_list_node **stack_b)
 	t_list_node *tmp;
 
 	tmp = *stack_a;
-	if (ft_list_size(*stack_a) > 0)
+	if (*stack_a != NULL && ft_list_size(*stack_a) > 0)
 	{
 		*stack_a = (*stack_a)->next;
 		tmp->next = NULL;

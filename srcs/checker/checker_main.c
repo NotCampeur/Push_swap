@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 11:51:21 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/15 15:40:10 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/16 12:41:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int				main(int argc, char *argv[])
 	stack_a = init_stack(argv + debug);
 	stack_b = NULL;
 	operations = get_instructions();
+	if (operations == NULL)
+	{
+		ft_putstr_fd(2, FT_BOLD_RED"Error\nWrong operation\n"FT_BASIC);
+		quit(stack_a, stack_b, operations);
+	}
 	if (debug == true)
 		start_debug(operations, stack_a);
 	apply_operation((char**)operations, debug, &stack_a, &stack_b);

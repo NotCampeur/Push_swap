@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_includes.h                                 :+:      :+:    :+:   */
+/*   checker_load.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 11:44:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/16 15:16:05 by ldutriez         ###   ########.fr       */
+/*   Created: 2021/03/16 15:15:07 by ldutriez          #+#    #+#             */
+/*   Updated: 2021/03/16 15:16:29 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_INCLUDES_H
-# define CHECKER_INCLUDES_H
+#ifndef CHECKER_LOAD_H
+# define CHECKER_LOAD_H
 
-# include <signal.h>
-# include "libft.h"
-# include "checker_operations.h"
-# include "checker_load.h"
-# include "checker_engine.h"
-# include "checker_verbose.h"
+/*
+** Read STDIN until a \n is catch
+*/
+void			**get_instructions(void);
+
+/*
+** Will split argv into a t_liat_node *.
+*/
+t_list_node		*init_stack(char **args);
+
+/*
+** Check if the program can properly work with the given params
+*/
+int				parse_args(int argc, char *argv[], t_bool *debug);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:35:34 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/15 14:46:58 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/16 14:45:33 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void	print_in_log(char *op, t_list_node *stack_a, t_list_node *stack_b)
 	ft_putstr_fp("log.log", "\n==================================\n", "APPEND");
 	ft_putstr_fp("log.log", "Applying : ", "APPEND");
 	ft_putstr_fp("log.log", op, "APPEND");
-	ft_list_putstr_fp("log.log", "STACK A", stack_a, "APPEND");
+	if (stack_a != NULL)
+		ft_list_putstr_fp("log.log", "STACK A", stack_a, "APPEND");
+	else
+		ft_putstr_fp("log.log", "Stack A is empty\n", "APPEND");
 	if (stack_b != NULL)
 		ft_list_putstr_fp("log.log", "STACK B", stack_b, "APPEND");
 	else
