@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:21:18 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/16 17:11:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/17 12:09:51 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_bool	is_a_valid_operation(char *str)
 			|| ft_strcmp(str, "pa\n") == true || ft_strcmp(str, "pb\n") == true
 			|| ft_strcmp(str, "ra\n") == true || ft_strcmp(str, "rb\n") == true
 			|| ft_strcmp(str, "rr\n") == true || ft_strcmp(str, "rra\n") == true
-			|| ft_strcmp(str, "rrb\n") == true || ft_strcmp(str, "\n") == true)
+			|| ft_strcmp(str, "rrb\n") == true)
 		return (true);
 	return (false);
 }
@@ -43,16 +43,15 @@ void			**get_instructions(void)
 	{
 		buf = ft_strnew(5);
 		ret = read(STDIN_FILENO, buf, 3);
-		if (ret == 3 && is_a_valid_operation(buf) == true)
+		if (is_a_valid_operation(buf) == true)
 			ft_add_to_tab(ft_strdup(buf), &operations);
-		else if (ret == 3 && read(STDIN_FILENO, buf + 3, 1) == 1)
+		else if (ft_strcmp(buf, "\n") == false)
 		{
-			if (is_a_valid_operation(buf) == true)
+			if (ret == 3 && read(STDIN_FILENO, buf + 3, 1) == 1
+						&& is_a_valid_operation(buf) == true)
 				ft_add_to_tab(ft_strdup(buf), &operations);
-			else
-			{
+			else if (ret != 0)
 				return (incorrect_instruction(operations, buf));
-			}
 		}
 		free(buf);
 	}
