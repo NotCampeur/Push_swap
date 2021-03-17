@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:21:18 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/17 12:09:51 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/17 13:57:19 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,33 +76,4 @@ t_list_node		*init_stack(char **args)
 	}
 	free(splitted_args);
 	return (result);
-}
-
-int				parse_args(int argc, char *argv[], t_bool *debug)
-{
-	int	index;
-	int	len;
-
-	index = 0;
-	if (argc < 2)
-		return (EXIT_FAILURE);
-	else if (argc == 3 && ft_strcmp(argv[1], "-v"))
-		*debug = true;
-	else if (argc > 2)
-	{
-		ft_putstr_fd(2, FT_BOLD_RED"Error\nToo much arguments\n"FT_BASIC);
-		return (EXIT_FAILURE);
-	}
-	len = ft_strlen(argv[1 + *debug]);
-	while (index < len)
-	{
-		if (ft_is_digit(argv[1 + *debug][index]) == false
-			&& ft_is_white_space(argv[1 + *debug][index]) == false)
-		{
-			ft_putstr_fd(2, FT_BOLD_RED"Error\nArg not suitable\n"FT_BASIC);
-			return (EXIT_FAILURE);
-		}
-		index++;
-	}
-	return (EXIT_SUCCESS);
 }

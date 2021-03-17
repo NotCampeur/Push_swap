@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_load.h                                     :+:      :+:    :+:   */
+/*   push_swap_engine.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 15:15:07 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/16 15:16:29 by ldutriez         ###   ########.fr       */
+/*   Created: 2021/03/17 12:31:14 by ldutriez          #+#    #+#             */
+/*   Updated: 2021/03/17 12:41:39 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_LOAD_H
-# define CHECKER_LOAD_H
+#ifndef PUSH_SWAP_ENGINE_H
+# define PUSH_SWAP_ENGINE_H
 
 /*
-** Read STDIN until a \n is catch
+** Send the instructions in STDIN to sort the stack
 */
-void			**get_instructions(void);
+void	**gen_instructions(t_list_node	*stack_a);
 
 /*
-** Will split argv into a t_liat_node *.
+** Send the instructions in STDIN to sort the stack
 */
-t_list_node		*init_stack(char **args);
+void	send_instructions(void **operation);
 
 /*
-** Check if the program can properly work with the given params
+** Will exit properly by freeing what needs to be.
 */
-int				parse_args(int argc, char *argv[], t_bool *debug);
-
+void	quit(t_list_node *stack_a, t_list_node *stack_b, void **ops);
 
 #endif

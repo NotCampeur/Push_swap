@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_includes.h                                 :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 11:44:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/16 15:16:05 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/17 15:17:03 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_INCLUDES_H
-# define CHECKER_INCLUDES_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
-# include <signal.h>
-# include "libft.h"
-# include "checker_operations.h"
-# include "checker_load.h"
-# include "checker_engine.h"
-# include "checker_verbose.h"
+# include "checker_includes.h"
 
 #endif

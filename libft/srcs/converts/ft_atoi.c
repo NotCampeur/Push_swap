@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:47:17 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/10/23 13:22:57 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/17 16:10:51 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Converting numericals characters in a string into an integer. Skip all the
 **	spaces at the start of the string and accept one sign ('+' or '-'), then
 **	take only numericals characters. As soon as we encounter a non numerical
-**	character, we retrun the actual value of result.
+**	character, we return the actual value of result.
 */
 
 int	ft_atoi(char *str)

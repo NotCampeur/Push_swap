@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 11:44:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/11 14:03:10 by ldutriez         ###   ########.fr       */
+/*   Created: 2021/03/17 12:25:33 by ldutriez          #+#    #+#             */
+/*   Updated: 2021/03/17 12:25:48 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-# include "checker_includes.h"
+# include "push_swap_includes.h"
 
 #endif

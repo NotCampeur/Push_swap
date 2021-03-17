@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:13:40 by ldutriez          #+#    #+#              #
-#    Updated: 2021/03/16 14:29:05 by ldutriez         ###   ########.fr        #
+#    Updated: 2021/03/17 15:31:02 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,11 @@ LIB = ft
 
 CHECKER_SRC	=	checker_main.c \
 				apply_operation.c swap.c push.c rotate.c reverse_rotate.c \
-				checker_engine.c checker_load.c \
+				checker_engine.c checker_load.c checker_parsing.c \
 				checker_verbose.c
 				
-PUSH_SWAP_SRC =	push_swap_main.c
+PUSH_SWAP_SRC =	push_swap_main.c \
+				push_swap_engine.c push_swap_load.c push_swap_parsing.c
 
 # OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 

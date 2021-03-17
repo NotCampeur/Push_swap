@@ -6,11 +6,11 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 14:16:15 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/16 15:45:25 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/17 13:26:06 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "checker.h"
 
 void			quit(t_list_node *stack_a, t_list_node *stack_b, void **ops)
 {

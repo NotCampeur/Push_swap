@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_main.c                                   :+:      :+:    :+:   */
+/*   checker_load.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 15:40:31 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/17 13:31:53 by ldutriez         ###   ########.fr       */
+/*   Created: 2021/03/16 15:15:07 by ldutriez          #+#    #+#             */
+/*   Updated: 2021/03/17 13:58:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef CHECKER_LOAD_H
+# define CHECKER_LOAD_H
 
-int		main(int argc, char *argv[])
-{
-	t_list_node	*stack_a;
-	t_list_node	*stack_b;
-	void		**operations;
+/*
+** Read STDIN until a \n is catch
+*/
+void			**get_instructions(void);
 
-	if (parse_args(argc, argv) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	stack_a = init_stack(argv);
-	stack_b = NULL;
-	operations = gen_instructions(stack_a);
-	send_instructions(operations);
-	quit(stack_a, stack_b, operations);
-	return (EXIT_SUCCESS);
-}
+/*
+** Will split argv into a t_liat_node *.
+*/
+t_list_node		*init_stack(char **args);
+
+#endif

@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_main.c                                   :+:      :+:    :+:   */
+/*   checker_includes.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 15:40:31 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/17 13:31:53 by ldutriez         ###   ########.fr       */
+/*   Created: 2021/03/09 11:44:29 by ldutriez          #+#    #+#             */
+/*   Updated: 2021/03/17 15:16:50 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef CHECKER_INCLUDES_H
+# define CHECKER_INCLUDES_H
 
-int		main(int argc, char *argv[])
-{
-	t_list_node	*stack_a;
-	t_list_node	*stack_b;
-	void		**operations;
+# include <limits.h>
+# include "libft.h"
+# include "checker_operations.h"
+# include "checker_parsing.h"
+# include "checker_load.h"
+# include "checker_engine.h"
+# include "checker_verbose.h"
 
-	if (parse_args(argc, argv) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	stack_a = init_stack(argv);
-	stack_b = NULL;
-	operations = gen_instructions(stack_a);
-	send_instructions(operations);
-	quit(stack_a, stack_b, operations);
-	return (EXIT_SUCCESS);
-}
+#endif
