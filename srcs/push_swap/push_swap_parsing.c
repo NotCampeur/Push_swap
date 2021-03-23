@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:25:33 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/17 17:15:42 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/23 15:10:18 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ static t_bool		is_only_int(char *str)
 	while (char_numbers[index] != NULL)
 	{
 		value = ft_atoll(char_numbers[index]);
-		if (ft_strlen(char_numbers[index]) > 10
+		if (ft_strlen(char_numbers[index]) > 11
 				|| value > INT_MAX
 				|| value < INT_MIN)
 		{
-			ft_free_tab((void**)char_numbers);
 			ft_putstr_fd(2,
 				FT_BOLD_RED"Error\nSome arguments are not integers\n"FT_BASIC);
+			ft_putstr_fd(2, char_numbers[index]);
+			ft_free_tab((void**)char_numbers);
 			return (false);
 		}
 		index++;

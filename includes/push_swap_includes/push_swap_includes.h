@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:26:01 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/17 15:30:11 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/23 11:02:34 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 
 # include <limits.h>
 # include "libft.h"
+# include "push_swap_structure.h"
 # include "push_swap_load.h"
+# include "push_swap_algos.h"
 # include "push_swap_engine.h"
+# include "push_swap_operations.h"
+# include "push_swap_peculiar_cases.h"
 
 #endif

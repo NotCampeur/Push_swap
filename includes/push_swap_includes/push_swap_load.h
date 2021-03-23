@@ -6,12 +6,23 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:28:19 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/17 15:17:46 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/23 10:21:03 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_LOAD_H
 # define PUSH_SWAP_LOAD_H
+
+/*
+** Will index the arguments of the stack in crescent order.
+*/
+void			index_stack_nodes(t_node **nodes, int size);
+
+/*
+** Will malloc each node of the future linked list.
+** And call the index_stack_nodes.
+*/
+t_node			**init_stack_nodes(char **splitted_args, int args_nb);
 
 /*
 ** Will split argv into a t_liat_node *.

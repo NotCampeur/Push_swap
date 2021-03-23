@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:31:14 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/17 12:41:39 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/23 12:53:31 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 # define PUSH_SWAP_ENGINE_H
 
 /*
+** Check if the stack is sort
+*/
+t_bool	is_sort(t_list_node *stack_a, t_list_node *stack_b);
+
+/*
 ** Send the instructions in STDIN to sort the stack
 */
-void	**gen_instructions(t_list_node	*stack_a);
+void	**gen_instructions(t_list_node	**stack_a, t_list_node	**stack_b);
 
 /*
 ** Send the instructions in STDIN to sort the stack

@@ -1,1 +1,1 @@
-make check ARGS="-v""7 5 800 2456 2457 2458 2459 2460 2461 2462 2463 2464 2465 2466 2467" DEBUG=TRUE
+clear; make DEBUG=t; make stack_gen NB=200; ARG=$(cat stack.txt); ./push_swap $ARG | wc -l; ./push_swap $ARG | ./checker -v $ARG; echo $ARG

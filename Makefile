@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:13:40 by ldutriez          #+#    #+#              #
-#    Updated: 2021/03/17 15:31:02 by ldutriez         ###   ########.fr        #
+#    Updated: 2021/03/23 14:54:08 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ LIB_DIR =	libft
 PUSH_SWAP_OBJ_DIR = push_swap_obj
 CHECKER_OBJ_DIR = checker_obj
 
-vpath %.c $(foreach dir, $(PUSH_SWAP_SRC_DIR), $(dir):)
-vpath %.c $(foreach dir, $(CHECKER_SRC_DIR), $(dir):)
+vpath %.c $(foreach dir, $(SRCS_DIR), $(dir):)
 
 # List de toute les library a linker au projet (le nom - le lib et - le .a)
 LIB = ft
@@ -35,12 +34,14 @@ LIB = ft
 # SRC = $(foreach dir, $(SRCS_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 
 CHECKER_SRC	=	checker_main.c \
-				apply_operation.c swap.c push.c rotate.c reverse_rotate.c \
+				checker_apply_operation.c swap.c push.c rotate.c reverse_rotate.c \
 				checker_engine.c checker_load.c checker_parsing.c \
 				checker_verbose.c
 				
 PUSH_SWAP_SRC =	push_swap_main.c \
-				push_swap_engine.c push_swap_load.c push_swap_parsing.c
+				swap.c push.c rotate.c reverse_rotate.c \
+				push_swap_engine.c push_swap_load.c push_swap_parsing.c \
+				push_swap_peculiar_cases.c push_swap_algos.c
 
 # OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
@@ -121,6 +122,11 @@ norme:
 
 re:				fclean all
 
+correc:			$(NAME1) $(NAME2)
+				@echo "Launch The Correction Test $(_BLUE)$(NAME1)$(_WHITE)\n-----"
+				@./$(NAME1) $(ARGS) | wc -l; ./&(NAME1) $(ARGS) | ./$(NAME2) $(ARGS)
+				@echo "-----\n$(_BLUE)$(NAME1) $(_GREEN)successfully end$(_WHITE)\n-----"
+
 sort: 			$(NAME1)
 				@echo "Launch Binary File $(_BLUE)$(NAME1)$(_WHITE)\n-----"
 				@./$(NAME1) $(ARGS)
@@ -130,6 +136,11 @@ check:			$(NAME2)
 				@echo "Launch Binary File $(_BLUE)$(NAME2)$(_WHITE)\n-----"
 				@./$(NAME2) "$(ARGS)"
 				@echo "-----\n$(_BLUE)$(NAME2) $(_GREEN)successfully end$(_WHITE)\n-----"
+
+stack_gen:
+				@echo -n "-----\nCreating Executable $(_YELLOW)$@$(_WHITE) ... "
+				@g++ srcs/stack_generator/stack_generator.cpp -o stack_gen; ./stack_gen $(NB) > stack.txt
+				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
 clean:
 				@echo -n "$(_WHITE)Deleting Objects Directory $(_YELLOW)$(PUSH_SWAP_OBJ_DIR)" \
@@ -143,4 +154,4 @@ fclean:			clean
 				@rm -f $(NAME1) $(NAME2)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
-.PHONY: all clean flcean re show norme sort check re-install debug_mod
+.PHONY: all clean flcean re show norme sort check re-install debug_mod correc stack_gen

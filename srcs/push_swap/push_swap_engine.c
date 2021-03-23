@@ -6,27 +6,45 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:25:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/17 13:45:09 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/23 12:58:37 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	**gen_instructions(t_list_node *stack_a)
+t_bool			is_sort(t_list_node *stack_a, t_list_node *stack_b)
 {
-	void	**operations;
+	t_list_node	*tmp;
 
-	operations = ft_tab_new(0);
-	if (stack_a != NULL)
+	tmp = stack_a;
+	if (stack_b != NULL && ft_list_size(stack_b) != 0)
+		return (false);
+	while (stack_a->next != NULL)
 	{
-		ft_add_to_tab("ra\n", &operations);
-		ft_add_to_tab("sa\n", &operations);
-		ft_add_to_tab("rra\n", &operations);
+		if (((t_node*)stack_a->data)->value >=
+										((t_node*)stack_a->next->data)->value)
+		{
+			stack_a = tmp;
+			return (false);
+		}
+		stack_a = stack_a->next;
 	}
+	stack_a = tmp;
+	return (true);
+}
+
+void			**gen_instructions(t_list_node **stack_a, t_list_node **stack_b)
+{
+	void		**operations;
+	
+	operations = ft_tab_new(0);
+	// if (is_in_following_order(stack_a, &operations) == true)
+	// 	return (operations);
+	rev_push_sort(stack_a, stack_b, &operations);
 	return (operations);
 }
 
-void	send_instructions(void **operation)
+void			send_instructions(void **operation)
 {
 	int	index;
 	int	len;
@@ -40,7 +58,7 @@ void	send_instructions(void **operation)
 	}
 }
 
-void	quit(t_list_node *stack_a, t_list_node *stack_b, void **ops)
+void			quit(t_list_node *stack_a, t_list_node *stack_b, void **ops)
 {
 	if (stack_a != NULL)
 		ft_list_clear(&stack_a, free);
