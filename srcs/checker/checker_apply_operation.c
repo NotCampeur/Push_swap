@@ -6,35 +6,22 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:35:34 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/23 13:05:55 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:08:49 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static void	print_in_log(char *op, t_list_node *stack_a, t_list_node *stack_b)
-{
-	ft_putstr_fp("log_checker.log", "\n==================================\n", "APPEND");
-	ft_putstr_fp("log_checker.log", "Applying : ", "APPEND");
-	ft_putstr_fp("log_checker.log", op, "APPEND");
-	if (stack_a != NULL)
-		ft_list_putstr_fp("log_checker.log", "STACK A", stack_a, "APPEND");
-	else
-		ft_putstr_fp("log_checker.log", "Stack A is empty\n", "APPEND");
-	if (stack_b != NULL)
-		ft_list_putstr_fp("log_checker.log", "STACK B", stack_b, "APPEND");
-	else
-		ft_putstr_fp("log_checker.log", "Stack B is empty\n", "APPEND");
-}
-
-void		apply_operation(char **op, t_bool debug,
-								t_list_node **stack_a, t_list_node **stack_b)
+void		apply_operation(char **op, t_list_node **stack_a,
+				t_list_node **stack_b, t_bool debug, t_visualizer *visualizer)
 {
 	int	i;
 
 	i = 0;
 	while (op[i] != NULL)
 	{
+		if (debug == true)
+			draw_stacks(visualizer, stack_a, stack_b);
 		if (ft_strcmp(op[i], "sa\n") == 1 || ft_strcmp(op[i], "ss\n") == 1)
 			swap_a(stack_a);
 		if (ft_strcmp(op[i], "sb\n") == 1 || ft_strcmp(op[i], "ss\n") == 1)
@@ -51,8 +38,6 @@ void		apply_operation(char **op, t_bool debug,
 			reverse_rotate_a(stack_a);
 		if (ft_strcmp(op[i], "rrb\n") == 1 || ft_strcmp(op[i], "rrr\n") == 1)
 			reverse_rotate_b(stack_b);
-		if (debug == true)
-			print_in_log(op[i], *stack_a, *stack_b);
 		i++;
 	}
 }

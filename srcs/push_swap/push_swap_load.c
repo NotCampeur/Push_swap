@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:49:33 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/23 13:03:09 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/24 11:19:36 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void			index_stack_nodes(t_node **nodes, int size)
 		i++;
 	}
 	i = 0;
-	ft_putstr_fp("log_push_swap.log", "INDEXING THE STACK\n", "OVERWRITE");
-	while (i < size)
-	{
-		ft_putnbr_fp("log_push_swap.log", nodes[i]->value, "APPEND");
-		ft_putstr_fp("log_push_swap.log", " <- | -> ", "APPEND");
-		ft_putnbr_fp("log_push_swap.log", nodes[i]->index, "APPEND");
-		ft_putstr_fp("log_push_swap.log", "\n", "APPEND");
-		i++;
-	}
+	// ft_putstr_fp("log_push_swap.log", "INDEXING THE STACK\n", "OVERWRITE");
+	// while (i < size)
+	// {
+	// 	ft_putnbr_fp("log_push_swap.log", nodes[i]->value, "APPEND");
+	// 	ft_putstr_fp("log_push_swap.log", " <- | -> ", "APPEND");
+	// 	ft_putnbr_fp("log_push_swap.log", nodes[i]->index, "APPEND");
+	// 	ft_putstr_fp("log_push_swap.log", "\n", "APPEND");
+	// 	i++;
+	// }
 }
 
 t_node			**init_stack_nodes(char **splitted_args, int args_nb)

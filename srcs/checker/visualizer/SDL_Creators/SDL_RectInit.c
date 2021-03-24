@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_verbose.h                                  :+:      :+:    :+:   */
+/*   SDL_RectInit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/15 14:34:19 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/23 13:05:34 by ldutriez         ###   ########.fr       */
+/*   Created: 2021/03/24 08:29:52 by ldutriez          #+#    #+#             */
+/*   Updated: 2021/03/24 08:30:14 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_VERBOSE_H
-# define CHECKER_VERBOSE_H
+#include "checker.h"
 
-/*
-** Will print the first debug message and overwrite the log_checker.log file
-*/
-void	start_debug(void **operations, t_list_node	*stack_a);
+SDL_Rect	rect_init(int x, int y, int w, int h)
+{
+	SDL_Rect	result;
 
-#endif
+	result.x = x;
+	result.y = y;
+	result.w = w;
+	result.h = h;
+	return result;
+}

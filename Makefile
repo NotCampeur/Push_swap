@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:13:40 by ldutriez          #+#    #+#              #
-#    Updated: 2021/03/23 14:54:08 by ldutriez         ###   ########.fr        #
+#    Updated: 2021/03/24 17:31:53 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,11 @@ LIB = ft
 CHECKER_SRC	=	checker_main.c \
 				checker_apply_operation.c swap.c push.c rotate.c reverse_rotate.c \
 				checker_engine.c checker_load.c checker_parsing.c \
-				checker_verbose.c
-				
+				\
+				checker_visualizer.c \
+				SDL_ColorInit.c SDL_RectInit.c SDL_PointInit.c \
+				SDL_TextureManagement.c
+
 PUSH_SWAP_SRC =	push_swap_main.c \
 				swap.c push.c rotate.c reverse_rotate.c \
 				push_swap_engine.c push_swap_load.c push_swap_parsing.c \
@@ -60,6 +63,8 @@ IFLAGS =	$(foreach dir, $(INC_DIR), -I$(dir))
 
 LFLAGS =	$(foreach dir, $(LIB_DIR), -L $(dir)) \
 			$(foreach lib, $(LIB), -l $(lib))
+
+SDL_FILE = /usr/include/SDL2/SDL.h
 
 # Colors
 
@@ -115,6 +120,16 @@ $(NAME1): 		libft/libft.a $(INC_DIR) $(PUSH_SWAP_OBJ) Makefile
 $(NAME2): 		libft/libft.a $(INC_DIR) $(CHECKER_OBJ) Makefile
 				@echo -n "-----\nCreating Executable $(_YELLOW)$@$(_WHITE) ... "
 				@$(CC) $(CFLAGS) $(CHECKER_OBJ) $(LFLAGS) -o $(NAME2)
+				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
+
+$(SDL_FILE):
+				@echo -n "-----\nInstalling $(_YELLOW)sdl2$(_WHITE) ... "
+				@yes | sudo apt-get install libsdl2-2.0-0 libsdl2-gfx-1.0-0 libsdl2-image-dev libsdl2-mixer-2.0-0 libsdl2-net-2.0-0 libsdl2-ttf-dev
+				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
+				
+bonus:			$(SDL_FILE) libft/libft.a $(NAME1) $(INC_DIR) $(CHECKER_OBJ) Makefile
+				@echo -n "-----\nCreating Executable $(_YELLOW)checker$(_WHITE) ... "
+				@$(CC) $(CFLAGS) $(CHECKER_OBJ) `sdl2-config --libs` -lSDL2_ttf -lSDL2_image $(LFLAGS) -o $(NAME2)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
 norme:

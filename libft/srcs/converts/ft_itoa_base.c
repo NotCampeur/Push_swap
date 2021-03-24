@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 11:49:49 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/10/23 13:26:48 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:48:39 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char			*ft_itoa_base(long long int nbr, char *base)
 	if (base == NULL)
 		return (ft_print_error(__PRETTY_FUNCTION__, __LINE__, FT_E_ARG));
 	base_len = ft_strlen(base);
-	nbr_len = ft_nbrlen(nbr, base_len) - 1;
+	nbr_len = ft_nbrlen(nbr, base_len);
 	result = ft_strnew(nbr_len);
 	if (nbr < 0)
 	{
@@ -64,10 +64,10 @@ char			*ft_itoa_base(long long int nbr, char *base)
 		abs_nbr = nbr;
 	while (abs_nbr >= base_len)
 	{
-		result[nbr_len] = base[abs_nbr % base_len];
+		result[nbr_len - 1] = base[abs_nbr % base_len];
 		abs_nbr /= base_len;
 		nbr_len--;
 	}
-	result[nbr_len] = base[abs_nbr % base_len];
+	result[nbr_len - 1] = base[abs_nbr % base_len];
 	return (result);
 }

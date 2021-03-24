@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 11:44:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/17 15:17:29 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:08:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	reverse_rotate_b(t_list_node **stack_b);
 /*
 ** Will process the various operations on stacks.
 */
-void	apply_operation(char **op, t_bool debug,
-								t_list_node **stack_a, t_list_node **stack_b);
+void		apply_operation(char **op, t_list_node **stack_a,
+				t_list_node **stack_b, t_bool debug, t_visualizer *visualizer);
 
 #endif
