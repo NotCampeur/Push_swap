@@ -6,11 +6,11 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:52:06 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/23 12:09:33 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 13:41:07 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "ps_c_operations.h"
 
 void	push_a(t_list_node **stack_a, t_list_node **stack_b)
 {

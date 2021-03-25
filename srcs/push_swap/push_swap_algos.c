@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 10:56:05 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/23 12:58:03 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 17:58:22 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	push_smallest_a_on_b(t_list_node **stack_a, t_list_node **stack_b,
 			rotate_a(stack_a);
 		}
 	}
-	else if(*stack_a != NULL)
+	else if (*stack_a != NULL)
 	{
 		while (((t_node*)(*stack_a)->data)->index
 		!= ((t_node*)(*stack_b)->data)->index + 1)

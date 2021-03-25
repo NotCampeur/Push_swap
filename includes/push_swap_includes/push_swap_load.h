@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:28:19 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/23 10:21:03 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 14:01:55 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_node			**init_stack_nodes(char **splitted_args, int args_nb);
 /*
 ** Will split argv into a t_liat_node *.
 */
-t_list_node		*init_stack(char **args);
+t_list_node		*init_stack(int argc, char **args);
 
 /*
 ** Check if the program can properly work with the given params

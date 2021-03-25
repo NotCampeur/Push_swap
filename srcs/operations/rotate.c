@@ -6,11 +6,11 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:52:56 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/15 14:42:36 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 13:41:41 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "ps_c_operations.h"
 
 void	rotate_a(t_list_node **stack_a)
 {

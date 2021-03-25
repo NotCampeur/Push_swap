@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:25:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/23 12:58:37 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:08:07 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ t_bool			is_sort(t_list_node *stack_a, t_list_node *stack_b)
 void			**gen_instructions(t_list_node **stack_a, t_list_node **stack_b)
 {
 	void		**operations;
-	
+
 	operations = ft_tab_new(0);
-	// if (is_in_following_order(stack_a, &operations) == true)
-	// 	return (operations);
+	if (is_in_following_order(*stack_a, &operations) == true)
+		return (operations);
 	rev_push_sort(stack_a, stack_b, &operations);
 	return (operations);
 }

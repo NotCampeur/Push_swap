@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:26:01 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/23 11:02:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 13:40:02 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "push_swap_load.h"
 # include "push_swap_algos.h"
 # include "push_swap_engine.h"
-# include "push_swap_operations.h"
+# include "ps_c_operations.h"
 # include "push_swap_peculiar_cases.h"
 
 #endif

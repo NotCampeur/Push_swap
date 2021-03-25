@@ -1,6 +1,6 @@
 NAME	=		libft.a
 
-CC 		=		clang
+CC 		=		gcc
 
 SRC_DIR = 		$(shell find srcs -type d)
 INC_DIR = 		$(shell find includes -type d)

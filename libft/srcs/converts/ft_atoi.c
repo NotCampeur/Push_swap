@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:47:17 by ncoudsi           #+#    #+#             */
-/*   Updated: 2021/03/17 16:10:51 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:15:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_atoi(char *str)
 	int	sign;
 
 	if (str == NULL)
-		return ((int)ft_print_error(__PRETTY_FUNCTION__, __LINE__, FT_E_ARG));
+		return (0);
 	result = 0;
 	index = 0;
 	sign = 1;

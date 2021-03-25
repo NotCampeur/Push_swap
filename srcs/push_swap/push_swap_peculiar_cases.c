@@ -6,12 +6,11 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:49:24 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/23 11:03:10 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 17:59:45 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 t_bool	is_in_descending_order(t_list_node *stack_a)
 {
@@ -60,7 +59,7 @@ t_bool	is_in_following_order(t_list_node *stack_a, void ***operations)
 
 	index = 0;
 	list_size = ft_list_size(stack_a);
-	if 	(is_in_crescent_order(stack_a) == true)
+	if (is_in_crescent_order(stack_a) == true)
 		return (true);
 	else if (is_in_descending_order(stack_a) == true)
 	{

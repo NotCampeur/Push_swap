@@ -1,1 +1,0 @@
-clear; make DEBUG=t; make stack_gen NB=200; ARG=$(cat stack.txt); ./push_swap $ARG | wc -l; ./push_swap $ARG | ./checker -v $ARG; echo $ARG

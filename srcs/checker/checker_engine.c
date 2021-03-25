@@ -6,14 +6,13 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 14:16:15 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/24 18:17:18 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:29:28 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void			quit(t_visualizer *visualizer,
-						t_list_node *stack_a, t_list_node *stack_b, void **ops)
+void			quit(t_list_node *stack_a, t_list_node *stack_b, void **ops)
 {
 	if (stack_a != NULL)
 		ft_list_clear(&stack_a, free);
@@ -21,13 +20,11 @@ void			quit(t_visualizer *visualizer,
 		ft_list_clear(&stack_b, free);
 	if (ops != NULL)
 		ft_free_tab(ops);
-	if (visualizer != NULL)
-		destroy_visualizer(visualizer);
 	exit(0);
 }
 
-void			error_quit(t_visualizer *visualizer,
-						t_list_node *stack_a, t_list_node *stack_b, void **ops)
+void			error_quit(t_list_node *stack_a, t_list_node *stack_b,
+																	void **ops)
 {
 	if (stack_a != NULL)
 		ft_list_clear(&stack_a, free);
@@ -35,8 +32,6 @@ void			error_quit(t_visualizer *visualizer,
 		ft_list_clear(&stack_b, free);
 	if (ops != NULL)
 		ft_free_tab(ops);
-	if (visualizer != NULL)
-		destroy_visualizer(visualizer);
 	exit(1);
 }
 

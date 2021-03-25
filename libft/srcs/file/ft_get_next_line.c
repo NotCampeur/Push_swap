@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:59:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/10/23 13:54:02 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:17:02 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ static int	read_until_nl_or_eof(char **storage, char *buffer,
 		*read_return = read(fd, buffer, BUFFER_SIZE);
 		if (*read_return == IS_AN_ERROR)
 		{
-			return ((int)ft_print_error(__PRETTY_FUNCTION__, __LINE__,
-										FT_E_RD) - 1);
+			return (-1);
 		}
 		ft_str_add_suffix(storage, buffer);
 	}
@@ -89,14 +88,12 @@ int			ft_get_next_line(int fd, char **line)
 	read_return = 1;
 	if (line == NULL || fd < 0 || BUFFER_SIZE <= 0)
 	{
-		return ((int)ft_print_error(__PRETTY_FUNCTION__, __LINE__,
-									FT_E_ARG) - 1);
+		return (-1);
 	}
 	buffer = ft_strnew(BUFFER_SIZE);
 	if (buffer == NULL)
 	{
-		return ((int)ft_print_error(__PRETTY_FUNCTION__, __LINE__,
-									FT_E_ARG) - 1);
+		return (-1);
 	}
 	if (read_until_nl_or_eof(&storage, buffer, &read_return, fd) == -1)
 		return (IS_AN_ERROR);
