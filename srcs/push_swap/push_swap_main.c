@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:40:31 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/25 14:15:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/29 16:15:53 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		main(int argc, char *argv[])
 
 	if (parse_args(argc, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	stack_a = init_stack(argc - 1, argv);
+	stack_a = init_stack(argc - 1, argv + 1);
 	if (stack_a == NULL)
 		return (EXIT_FAILURE);
 	stack_b = NULL;

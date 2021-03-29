@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:28:04 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/25 17:50:24 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/26 10:46:34 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_visualizer	*start_visualizer(t_list_node *stack_a)
 	SDL_RenderPresent(result->render);
 	result->stack_m_s = ft_list_size(stack_a);
 	result->b_wd = S_WD / result->stack_m_s;
+	result->run = false;
 	return (result);
 }
 

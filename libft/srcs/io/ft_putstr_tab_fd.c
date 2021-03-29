@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 15:01:04 by ncoudsi           #+#    #+#             */
-/*   Updated: 2021/03/15 12:37:39 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/29 13:37:04 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putstr_tab_fd(int fd, char *name, char **tab)
 	size_t	index;
 
 	index = 0;
-	if (fd == -1 && tab == NULL)
+	if (fd == -1 || tab == NULL)
 		return ((void)ft_print_error(__PRETTY_FUNCTION__, __LINE__, FT_E_ARG));
 	if (name != NULL)
 	{

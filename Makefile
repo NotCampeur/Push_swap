@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:13:40 by ldutriez          #+#    #+#              #
-#    Updated: 2021/03/25 18:15:22 by ldutriez         ###   ########.fr        #
+#    Updated: 2021/03/26 13:38:08 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -183,7 +183,7 @@ sort: 			$(NAME1)
 
 check:			$(NAME2)
 				@echo "Launch Binary File $(_BLUE)$(NAME2)$(_WHITE)\n-----"
-				@./$(NAME2) "$(ARGS)"
+				@./$(NAME2) $(ARGS)
 				@echo "-----\n$(_BLUE)$(NAME2) $(_GREEN)successfully end$(_WHITE)\n-----"
 
 stack_gen:

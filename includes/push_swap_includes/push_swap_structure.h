@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 13:55:00 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/22 13:57:39 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/26 10:55:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct	s_node
 {
 	int			value;
 	int			index;
+	t_bool		tag;
 }				t_node;
 
 #endif

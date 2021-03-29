@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:49:24 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/25 17:59:45 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/26 12:10:31 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,16 @@ t_bool	is_in_crescent_order(t_list_node *stack_a)
 	tmp = stack_a;
 	while (stack_a->next != NULL)
 	{
-		if (ft_atoi((stack_a->data)) > ft_atoi((stack_a->next->data)))
-			break ;
-		if (stack_a->next->next == NULL)
+		if (((t_node*)stack_a->data)->value >=
+									((t_node*)stack_a->next->data)->value)
 		{
 			stack_a = tmp;
-			return (true);
+			return (false);
 		}
 		stack_a = stack_a->next;
 	}
 	stack_a = tmp;
-	return (false);
+	return (true);
 }
 
 t_bool	is_in_following_order(t_list_node *stack_a, void ***operations)
@@ -77,5 +76,6 @@ t_bool	is_in_following_order(t_list_node *stack_a, void ***operations)
 		}
 		return (true);
 	}
+	ft_putstr_fd(2, "Is not PECULIAR... \n");
 	return (false);
 }
