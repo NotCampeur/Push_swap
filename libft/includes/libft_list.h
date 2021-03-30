@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 08:21:26 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/10/21 17:36:26 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:05:59 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ t_list_node		*ft_list_map(t_list_node *list, void *(*function)(void*),
 int				ft_list_size(t_list_node *list);
 void			ft_list_remove_node(t_list_node **list, size_t node_index,
 												void (*destructor)(void*));
+t_list_node		*ft_list_get_node(t_list_node **list, size_t pos);
 
 #endif

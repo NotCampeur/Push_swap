@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 14:31:11 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/29 12:13:41 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/30 14:44:57 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ static void	draw_bar(t_visualizer *vz, t_list_node **stack,
 	{
 		if (((*stack)->next != NULL && ((t_node*)(*stack)->data)->value
 			< ((t_node*)(*stack)->next->data)->value) || (*stack)->next == NULL)
-			sdl_render_fill_rect(vz->render, bar, color_init(0, 255, 0));
+			sdl_render_fill_rect(vz->render, bar, color_init(0, 200, 0));
 		else
-			sdl_render_fill_rect(vz->render, bar, color_init(255, 0, 0));
+			sdl_render_fill_rect(vz->render, bar, color_init(155, 0, 0));
 	}
 	else if (stack_id == 'b')
 	{
 		if (((*stack)->next != NULL && ((t_node*)(*stack)->data)->value
 			> ((t_node*)(*stack)->next->data)->value) || (*stack)->next == NULL)
-			sdl_render_fill_rect(vz->render, bar, color_init(0, 0, 255));
+			sdl_render_fill_rect(vz->render, bar, color_init(0, 0, 200));
 		else
-			sdl_render_fill_rect(vz->render, bar, color_init(255, 0, 0));
+			sdl_render_fill_rect(vz->render, bar, color_init(155, 0, 0));
 	}
 }
 
@@ -76,8 +76,6 @@ void		draw_stacks(t_visualizer *vz, t_list_node **s_a, t_list_node **s_b)
 	}
 	*s_a = tmp;
 	tmp = *s_b;
-	sdl_render_fill_rect(vz->render,
-		rect_init(vz->b_wd * index - 1, 0, 1, S_HT), color_init(255, 255, 255));
 	while (*s_b != NULL)
 	{
 		draw_bar(vz, s_b, index, 'b');
@@ -85,6 +83,9 @@ void		draw_stacks(t_visualizer *vz, t_list_node **s_a, t_list_node **s_b)
 		*s_b = (*s_b)->next;
 	}
 	*s_b = tmp;
+	sdl_render_fill_rect(vz->render,
+		rect_init(vz->b_wd * ft_list_size(*s_a), 0, 1, S_HT),
+		color_init(255, 155, 0));
 }
 
 void		visualize_operation(char **op, t_list_node **stack_a,
