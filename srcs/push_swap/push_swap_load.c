@@ -6,52 +6,12 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:49:33 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/30 15:38:26 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/31 13:15:33 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// static int		find_markup_head_value(t_node **nodes, int size)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	tag_nb;
-// 	int	tag_max;
-// 	int	max_value;
-// 	int	m_h_index;
-
-// 	i = 0;
-// 	tag_max = 0;
-// 	m_h_index = 0;
-// 	while (i < size)
-// 	{
-// 		max_value = INT_MIN;
-// 		j = i;
-// 		tag_nb = 0;
-// 		while (j < size)
-// 		{
-// 			if (max_value < nodes[j]->value)
-// 			{
-// 				max_value = nodes[j]->value;
-// 				tag_nb++;
-// 			}
-// 			j++;
-// 		}
-// 		if (tag_nb > tag_max)
-// 		{
-// 			tag_max = tag_nb;
-// 			m_h_index = i;
-// 		}
-// 		i++;
-// 	}
-// 	ft_putstr_fd(2, "markup_head = [");
-// 	ft_putnbr_fd(2, m_h_index);
-// 	ft_putstr_fd(2, "] with (");
-// 	ft_putnbr_fd(2, tag_max);
-// 	ft_putstr_fd(2, ")\n");
-// 	return (m_h_index);
-// }
 
 // static void		nodes_markup_value(t_node **nodes, int size)
 // {
@@ -63,25 +23,25 @@
 // 	tag_nb = 0;
 // 	max_value = nodes[j]->value;
 // 	nodes[j]->tag = true;
-// 			ft_putstr_fd(2, "[");
-// 			ft_putnbr_fd(2, j);
-// 			ft_putstr_fd(2, "|");
-// 			ft_putnbr_fd(2, nodes[j]->index);
-// 			ft_putstr_fd(2, "|");
-// 			ft_putnbr_fd(2, nodes[j]->value);
-// 			ft_putstr_fd(2, "]\n");
+			// ft_putstr_fd(2, "[");
+			// ft_putnbr_fd(2, j);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[j]->index);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[j]->value);
+			// ft_putstr_fd(2, "]\n");
 // 	j++;
 // 	while (j < size)
 // 	{
 // 		if (max_value < nodes[j]->value)
 // 		{
-// 			ft_putstr_fd(2, "[");
-// 			ft_putnbr_fd(2, j);
-// 			ft_putstr_fd(2, "|");
-// 			ft_putnbr_fd(2, nodes[j]->index);
-// 			ft_putstr_fd(2, "|");
-// 			ft_putnbr_fd(2, nodes[j]->value);
-// 			ft_putstr_fd(2, "]\n");
+			// ft_putstr_fd(2, "[");
+			// ft_putnbr_fd(2, j);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[j]->index);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[j]->value);
+			// ft_putstr_fd(2, "]\n");
 // 			max_value = nodes[j]->value;
 // 			nodes[j]->tag = true;
 // 			tag_nb++;
@@ -95,17 +55,56 @@
 // 	}
 // }
 
-static int		find_markup_head(t_node **nodes, int size)
+static int		markup_with_value(t_node **nodes, int size, int *tag_max)
 {
 	int	i;
 	int	j;
 	int	tag_nb;
-	int	tag_max;
+	int	max_value;
+	int	m_h_index;
+
+	i = 0;
+	*tag_max = 0;
+	m_h_index = 0;
+	while (i < size)
+	{
+		max_value = INT_MIN;
+		j = i;
+		tag_nb = 0;
+		while (j < size)
+		{
+			if (max_value < nodes[j]->value)
+			{
+				max_value = nodes[j]->value;
+				tag_nb++;
+			}
+			j++;
+		}
+		if (tag_nb > *tag_max)
+		{
+			*tag_max = tag_nb;
+			m_h_index = i;
+		}
+		i++;
+	}
+	// ft_putstr_fd(2, "markup_head = [");
+	// ft_putnbr_fd(2, m_h_index);
+	// ft_putstr_fd(2, "] with (");
+	// ft_putnbr_fd(2, *tag_max);
+	// ft_putstr_fd(2, ")\n");
+	return (m_h_index);
+}
+
+static int		markup_with_index(t_node **nodes, int size, int *tag_max)
+{
+	int	i;
+	int	j;
+	int	tag_nb;
 	int	last_index;
 	int	m_h_index;
 
 	i = 0;
-	tag_max = 0;
+	*tag_max = 0;
 	m_h_index = 0;
 	while (i < size)
 	{
@@ -121,59 +120,143 @@ static int		find_markup_head(t_node **nodes, int size)
 			}
 			j++;
 		}
-		if (tag_nb > tag_max)
+		if (tag_nb > *tag_max)
 		{
-			tag_max = tag_nb;
+			*tag_max = tag_nb;
 			m_h_index = i;
 		}
 		i++;
 	}
-	ft_putstr_fd(2, "markup_head = [");
-	ft_putnbr_fd(2, m_h_index);
-	ft_putstr_fd(2, "] with (");
-	ft_putnbr_fd(2, tag_max + 1);
-	ft_putstr_fd(2, ")\n");
+	// ft_putstr_fd(2, "markup_head = [");
+	// ft_putnbr_fd(2, m_h_index);
+	// ft_putstr_fd(2, "] with (");
+	// ft_putnbr_fd(2, tag_max + 1);
+	// ft_putstr_fd(2, ")\n");
 	return (m_h_index);
+}
+
+static int		find_markup_head(t_node **nodes, int size, t_bool *index_type)
+{
+	int	result_index;
+	int	result_value;
+	int	tag_nb;
+	int	tmp;
+
+	*index_type = false;
+	result_index = markup_with_index(nodes, size, &tag_nb);
+	tmp = tag_nb;
+	result_value = markup_with_value(nodes, size, &tag_nb);
+	if (tmp >= tag_nb)
+	{
+		*index_type = true;
+		return (result_index);
+	}
+	return (result_value);
 }
 
 static void		nodes_markup(t_node **nodes, int size)
 {
-	int	j;
-	int	tag_nb;
-	int	last_index;
+	int		i;
+	int		j;
+	int		tag_nb;
+	int		last_index;
+	t_bool	index_type;
 
-	j = find_markup_head(nodes, size);
+	i = find_markup_head(nodes, size, &index_type);
+	j = i;
 	tag_nb = 0;
-	last_index = nodes[j]->index;
+	if (index_type == true)
+		last_index = nodes[j]->index;
+	else
+		last_index = nodes[j]->value;
 	nodes[j]->tag = true;
-			ft_putstr_fd(2, "[");
-			ft_putnbr_fd(2, j);
-			ft_putstr_fd(2, "|");
-			ft_putnbr_fd(2, nodes[j]->index);
-			ft_putstr_fd(2, "|");
-			ft_putnbr_fd(2, nodes[j]->value);
-			ft_putstr_fd(2, "]\n");
+			// ft_putstr_fd(2, "[");
+			// ft_putnbr_fd(2, j);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[j]->index);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[j]->value);
+			// ft_putstr_fd(2, "]\n");
 	j++;
 	while (j < size)
 	{
-		if (last_index + 1 == nodes[j]->index)
+		if (index_type == true)
 		{
-			ft_putstr_fd(2, "[");
-			ft_putnbr_fd(2, j);
-			ft_putstr_fd(2, "|");
-			ft_putnbr_fd(2, nodes[j]->index);
-			ft_putstr_fd(2, "|");
-			ft_putnbr_fd(2, nodes[j]->value);
-			ft_putstr_fd(2, "]\n");
-			last_index++;
+			if (last_index + 1 == nodes[j]->index)
+			{
+				// ft_putstr_fd(2, "[");
+				// ft_putnbr_fd(2, j);
+				// ft_putstr_fd(2, "|");
+				// ft_putnbr_fd(2, nodes[j]->index);
+				// ft_putstr_fd(2, "|");
+				// ft_putnbr_fd(2, nodes[j]->value);
+				// ft_putstr_fd(2, "]\n");
+				last_index++;
+				nodes[j]->tag = true;
+				tag_nb++;
+			}
+		}
+		else
+		{
+			if (last_index < nodes[j]->value)
+			{
+				// ft_putstr_fd(2, "[");
+				// ft_putnbr_fd(2, j);
+				// ft_putstr_fd(2, "|");
+				// ft_putnbr_fd(2, nodes[j]->index);
+				// ft_putstr_fd(2, "|");
+				// ft_putnbr_fd(2, nodes[j]->value);
+				// ft_putstr_fd(2, "]\n");
+				last_index = nodes[j]->value;
+				nodes[j]->tag = true;
+				tag_nb++;
+			}
+		}
+		j++;
+	}
+
+	j = i;
+	while (tag_nb >= 0)
+	{
+		if (nodes[j]->tag == true)
+			tag_nb--;
+		j++;
+	}
+	last_index = nodes[j - 1]->index;
+	while (j < size)
+	{
+		if (last_index < nodes[j]->index)
+		{
+			// ft_putstr_fd(2, "[");
+			// ft_putnbr_fd(2, j);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[j]->index);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[j]->value);
+			// ft_putstr_fd(2, "]\n");
+			last_index = nodes[j]->index;
 			nodes[j]->tag = true;
 			tag_nb++;
 		}
-		// if (nodes[i]->index == nodes[j]->index - 1 - tag_nb)
-		// {
-		// 	nodes[j]->tag = true;
-		// 	tag_nb++;
-		// }
+		j++;
+	}
+	
+	j = 0;
+	last_index = nodes[i]->index;
+	while (j <= i)
+	{
+		if (last_index > nodes[i - j]->index)
+		{
+			// ft_putstr_fd(2, "[");
+			// ft_putnbr_fd(2, i - j);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[i - j]->index);
+			// ft_putstr_fd(2, "|");
+			// ft_putnbr_fd(2, nodes[i - j]->value);
+			// ft_putstr_fd(2, "]\n");
+			last_index = nodes[i - j]->index;
+			nodes[i - j]->tag = true;
+		}
 		j++;
 	}
 }

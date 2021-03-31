@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 10:56:05 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/30 16:53:40 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/03/31 14:33:56 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	push_untagged(t_list_node **s_a, t_list_node **s_b, void ***ops)
 {
 	int			count;
 	t_list_node	*tmp;
+	t_list_node	*tmp_2;
 
 	count = 0;
 	tmp = *s_a;
@@ -61,19 +62,65 @@ void	push_untagged(t_list_node **s_a, t_list_node **s_b, void ***ops)
 	*s_a = tmp;
 	while (count > 0)
 	{
-		// if ((*s_a)->next != NULL
-		// 	&& ((t_node*)(*s_a)->data)->tag == false
-		// 	&& ((t_node*)(*s_a)->next->data)->tag == true)
+		// if ((*s_a)->next != NULL)
 		// {
-		// 	if (((t_node*)(*s_a)->data)->index < ((t_node*)(*s_a)->next->data)->index)
+		// 	if (((t_node*)(*s_a)->data)->index == 0
+		// 		&& ((t_node*)(*s_a)->next->data)->index == ft_list_size(*s_a))
 		// 	{
-		// 		((t_node*)(*s_a)->data)->tag = true;
+		// 		if (((t_node*)(*s_a)->data)->tag == false)
+		// 		{
+		// 			((t_node*)(*s_a)->data)->tag = true;
+		// 			count--;
+		// 		}
+		// 		if (((t_node*)(*s_a)->next->data)->tag == false)
+		// 		{
+		// 			((t_node*)(*s_a)->next->data)->tag = true;
+		// 			count--;
+		// 		}
 		// 		ft_add_to_tab("sa\n", ops);
 		// 		swap_stack(s_a);
-		// 		count--;
 		// 	}
 		// }
-		if (((t_node*)(*s_a)->data)->tag == false)
+		if ((*s_a)->next != NULL
+			&& ((t_node*)(*s_a)->data)->tag == true
+			&& ((t_node*)(*s_a)->next->data)->tag == false)
+		{
+			tmp_2 = ft_list_get_node(s_a, INT_MAX);
+			if (((t_node*)(*s_a)->data)->index > ((t_node*)(*s_a)->next->data)->index
+			&& (((t_node*)(*s_a)->next->data)->index > ((t_node*)(tmp_2)->data)->index
+				))
+			{
+				((t_node*)(*s_a)->next->data)->tag = true;
+				ft_add_to_tab("sa\n", ops);
+				swap_stack(s_a);
+				count--;
+			}
+		}
+		else if ((*s_a)->next != NULL && (*s_a)->next->next != NULL
+			&& ((t_node*)(*s_a)->data)->tag == false
+			&& ((t_node*)(*s_a)->next->data)->tag == true)
+		{
+			tmp_2 = *s_a;
+			tmp_2 = tmp_2->next->next;
+			while (tmp_2 != NULL && ((t_node*)(tmp_2)->data)->tag == false)
+			{
+				tmp_2 = tmp_2->next;
+			}
+			if (tmp_2 != NULL
+			&& ((t_node*)(*s_a)->data)->index > ((t_node*)(*s_a)->next->data)->index
+			&& ((t_node*)(*s_a)->data)->index < ((t_node*)(tmp_2)->data)->index)
+			{
+				((t_node*)(*s_a)->data)->tag = true;
+				ft_add_to_tab("sa\n", ops);
+				swap_stack(s_a);
+				count--;
+			}
+		}
+		if (is_in_crescent_order(*s_a) == true)
+		{
+			count = 0;
+		}
+		else if (((t_node*)(*s_a)->data)->tag == false)
 		{
 			ft_add_to_tab("pb\n", ops);
 			push_b(s_a, s_b);
@@ -201,16 +248,36 @@ void	**moves_to_place(t_list_node **s_a, t_list_node **s_b, int *moves_needed
 	// ft_putnbr_fd(2, target);
 	// ft_putstr_fd(2, "] target \n");
 	*s_b = tmp_b;
-	if (target >= size_a / 2 && location > size_b / 2)
+	if (target >= size_a / 2)
 	{
-		while (target < size_a && location < size_b)
+		if (location >= size_b / 2)
 		{
-			ft_add_to_tab("rrr\n", &result);
-			// reverse_rotate_a(s_a);
-			// reverse_rotate_b(s_b);
-			(*moves_needed)++;
-			target++;
-			location++;
+			while (target < size_a && location < size_b)
+			{
+				ft_add_to_tab("rrr\n", &result);
+				// reverse_rotate_a(s_a);
+				// reverse_rotate_b(s_b);
+				(*moves_needed)++;
+				target++;
+				location++;
+			}
+			while (location < size_b)
+			{
+				ft_add_to_tab("rrb\n", &result);
+				// reverse_rotate_b(s_b);
+				(*moves_needed)++;
+				location++;
+			}
+		}
+		else
+		{
+			while (location > 0)
+			{
+				ft_add_to_tab("rb\n", &result);
+				// rotate_b(s_b);
+				(*moves_needed)++;
+				location--;
+			}
 		}
 		while (target < size_a)
 		{
@@ -219,24 +286,37 @@ void	**moves_to_place(t_list_node **s_a, t_list_node **s_b, int *moves_needed
 			(*moves_needed)++;
 			target++;
 		}
-		while (location < size_b)
-		{
-			ft_add_to_tab("rrb\n", &result);
-			// reverse_rotate_b(s_b);
-			(*moves_needed)++;
-			location++;
-		}
 	}
-	else
+	else if (target < size_a / 2)
 	{
-		while (target > 0 && location > 0)
+		if (location < size_b / 2)
 		{
-			ft_add_to_tab("rr\n", &result);
-			// rotate_a(s_a);
-			// rotate_b(s_b);
-			(*moves_needed)++;
-			target--;
-			location--;
+			while (target > 0 && location > 0)
+			{
+				ft_add_to_tab("rr\n", &result);
+				// rotate_a(s_a);
+				// rotate_b(s_b);
+				(*moves_needed)++;
+				target--;
+				location--;
+			}
+			while (location > 0)
+			{
+				ft_add_to_tab("rb\n", &result);
+				// rotate_b(s_b);
+				(*moves_needed)++;
+				location--;
+			}
+		}
+		else
+		{
+			while (location < size_b && location != 0)
+			{
+				ft_add_to_tab("rrb\n", &result);
+				// reverse_rotate_b(s_b);
+				(*moves_needed)++;
+				location++;
+			}
 		}
 		while (target > 0)
 		{
@@ -244,13 +324,6 @@ void	**moves_to_place(t_list_node **s_a, t_list_node **s_b, int *moves_needed
 			// rotate_a(s_a);
 			(*moves_needed)++;
 			target--;
-		}
-		while (location > 0)
-		{
-			ft_add_to_tab("rb\n", &result);
-			// rotate_b(s_b);
-			(*moves_needed)++;
-			location--;
 		}
 	}
 	
@@ -300,18 +373,22 @@ static void	order_stack(t_list_node **s_a, void ***ops)
 {
 	t_list_node	*tmp;
 	int			pos;
+	int			size_a;
+	int			is_odd;
 
 	tmp = *s_a;
 	pos = 0;
+	size_a = ft_list_size(*s_a);
+	is_odd = size_a % 2;
 	while (((t_node*)(*s_a)->data)->index != 0)
 	{
 		pos++;
 		(*s_a) = (*s_a)->next;
 	}
 	*s_a = tmp;
-	if (pos >= ft_list_size(*s_a) / 2 && pos != 0)
+	if (pos >= size_a / 2 + is_odd && pos != 0)
 	{
-		while (pos < ft_list_size(*s_a))
+		while (pos < size_a)
 		{
 			ft_add_to_tab("rra\n", ops);
 			reverse_rotate_a(s_a);
@@ -332,14 +409,14 @@ static void	order_stack(t_list_node **s_a, void ***ops)
 void	rev_push_sort(t_list_node **s_a, t_list_node **s_b, void ***ops)
 {
 	push_untagged(s_a, s_b, ops);
-	ft_putstr_fd(2, "Untaggeds pushed, list size = [");
-	ft_putnbr_fd(2, ft_list_size(*s_a));
-	ft_putstr_fd(2, "]\n");
+	// ft_putstr_fd(2, "Untaggeds pushed, list size = [");
+	// ft_putnbr_fd(2, ft_list_size(*s_a));
+	// ft_putstr_fd(2, "]\n");
 	while (*s_b != NULL)
 	{
 		move_the_best_value(s_a, s_b, ops);
 	}
-	ft_putstr_fd(2, "Stack_b is empty\n");
+	// ft_putstr_fd(2, "Stack_b is empty\n");
 	order_stack(s_a, ops);
 	// while (is_sort(*s_a, *s_b) == false)
 		// push_smallest_a_on_b(s_a, s_b, ops);
