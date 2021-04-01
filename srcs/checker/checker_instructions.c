@@ -6,13 +6,13 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 17:53:46 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/25 17:54:17 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 15:06:55 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static t_bool	is_a_valid_operation(char *str)
+static t_bool		is_a_valid_operation(char *str)
 {
 	if (ft_strcmp(str, "sa\n") == true || ft_strcmp(str, "rrr\n") == true
 			|| ft_strcmp(str, "sb\n") == true || ft_strcmp(str, "ss\n") == true
@@ -24,34 +24,35 @@ static t_bool	is_a_valid_operation(char *str)
 	return (false);
 }
 
-static void		*incorrect_instruction(void **operations, char *buf)
+static t_list_node	*incorrect_instruction(t_list_node **operations, char *buf)
 {
-	ft_free_tab(operations);
+	ft_list_clear(operations, free);
 	free(buf);
-	return (NULL);
+	ft_list_add_back(operations, ft_malloc_node(ft_strdup("Error")));
+	return (*operations);
 }
 
-void			**get_instructions(void)
+t_list_node			*get_instructions(void)
 {
-	int		ret;
-	void	**operations;
-	char	*buf;
+	int			ret;
+	t_list_node	*operations;
+	char		*buf;
 
 	ret = 3;
-	operations = ft_tab_new(0);
+	operations = NULL;
 	while (ret > 2)
 	{
 		buf = ft_strnew(5);
 		ret = read(STDIN_FILENO, buf, 3);
 		if (is_a_valid_operation(buf) == true)
-			ft_add_to_tab(ft_strdup(buf), &operations);
-		else if (ft_strcmp(buf, "\n") == false)
+			ft_list_add_back(&operations, ft_malloc_node(ft_strdup(buf)));
+		else
 		{
 			if (ret == 3 && read(STDIN_FILENO, buf + 3, 1) == 1
 						&& is_a_valid_operation(buf) == true)
-				ft_add_to_tab(ft_strdup(buf), &operations);
+				ft_list_add_back(&operations, ft_malloc_node(ft_strdup(buf)));
 			else if (ret != 0)
-				return (incorrect_instruction(operations, buf));
+				return (incorrect_instruction(&operations, buf));
 		}
 		free(buf);
 	}

@@ -6,57 +6,46 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 14:16:15 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/25 12:29:28 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 15:24:42 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void			quit(t_list_node *stack_a, t_list_node *stack_b, void **ops)
+void			quit(t_system *sys, int exit_nb)
 {
-	if (stack_a != NULL)
-		ft_list_clear(&stack_a, free);
-	if (stack_b != NULL)
-		ft_list_clear(&stack_b, free);
-	if (ops != NULL)
-		ft_free_tab(ops);
-	exit(0);
+	if (sys->s_a != NULL)
+		ft_list_clear(&sys->s_a, free);
+	if (sys->s_b != NULL)
+		ft_list_clear(&sys->s_b, free);
+	if (sys->ops != NULL)
+		ft_list_clear(&sys->ops, free);
+	free(sys);
+	exit(exit_nb);
 }
 
-void			error_quit(t_list_node *stack_a, t_list_node *stack_b,
-																	void **ops)
-{
-	if (stack_a != NULL)
-		ft_list_clear(&stack_a, free);
-	if (stack_b != NULL)
-		ft_list_clear(&stack_b, free);
-	if (ops != NULL)
-		ft_free_tab(ops);
-	exit(1);
-}
-
-t_bool			resolution(t_list_node *stack_a, t_list_node *stack_b)
+t_bool			resolution(t_list_node *s_a, t_list_node *s_b)
 {
 	t_list_node	*tmp;
 
-	tmp = stack_a;
-	if (stack_b != NULL && ft_list_size(stack_b) != 0)
+	tmp = s_a;
+	if (s_b != NULL && ft_list_size(s_b) != 0)
 	{
 		ft_putstr(FT_BOLD_RED"KO\n"FT_BASIC);
 		return (false);
 	}
-	while (stack_a->next != NULL)
+	while (s_a->next != NULL)
 	{
-		if (((t_node*)stack_a->data)->value >=
-									((t_node*)stack_a->next->data)->value)
+		if (((t_node*)s_a->data)->value >=
+									((t_node*)s_a->next->data)->value)
 		{
 			ft_putstr(FT_BOLD_RED"KO\n"FT_BASIC);
-			stack_a = tmp;
+			s_a = tmp;
 			return (false);
 		}
-		stack_a = stack_a->next;
+		s_a = s_a->next;
 	}
 	ft_putstr(FT_BOLD_GREEN"OK\n"FT_BASIC);
-	stack_a = tmp;
+	s_a = tmp;
 	return (true);
 }

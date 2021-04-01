@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:40:31 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/29 16:15:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 12:07:45 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 int		main(int argc, char *argv[])
 {
-	t_list_node	*stack_a;
-	t_list_node	*stack_b;
-	void		**operations;
+	t_system	*sys;
 
+	sys = system_init();
 	if (parse_args(argc, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	stack_a = init_stack(argc - 1, argv + 1);
-	if (stack_a == NULL)
+	sys->s_a = init_stack(argc - 1, argv + 1);
+	if (sys->s_a == NULL)
 		return (EXIT_FAILURE);
-	stack_b = NULL;
-	operations = gen_instructions(&stack_a, &stack_b);
-	send_instructions(operations);
-	quit(stack_a, stack_b, operations);
+	sys->s_b = NULL;
+	gen_instructions(sys);
+	send_instructions(sys->ops);
+	quit(sys);
 	return (EXIT_SUCCESS);
 }

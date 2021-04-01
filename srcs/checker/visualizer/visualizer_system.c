@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:28:04 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/26 10:46:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 15:31:52 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_visualizer	init_visualizer(void)
 	return (result);
 }
 
-t_visualizer	*start_visualizer(t_list_node *stack_a)
+t_visualizer	*start_visualizer(t_list_node *s_a)
 {
 	t_visualizer *result;
 
@@ -39,8 +39,10 @@ t_visualizer	*start_visualizer(t_list_node *stack_a)
 	result->font = TTF_OpenFont("ressources/OpenSans-Bold.ttf", 20);
 	SDL_RenderClear(result->render);
 	SDL_RenderPresent(result->render);
-	result->stack_m_s = ft_list_size(stack_a);
+	result->stack_m_s = ft_list_size(s_a);
 	result->b_wd = S_WD / result->stack_m_s;
+	result->s_wd = (S_WD - result->b_wd * result->stack_m_s);
+	SDL_SetWindowSize(result->win, S_WD - result->s_wd, S_HT);
 	result->run = false;
 	return (result);
 }
@@ -58,30 +60,16 @@ void			destroy_visualizer(t_visualizer *visualizer)
 	free(visualizer);
 }
 
-void			visualizer_quit(t_visualizer *visualizer,
-						t_list_node *stack_a, t_list_node *stack_b, void **ops)
+void			visualizer_quit(t_visualizer *vz, t_system *sys, int exit_nb)
 {
-	if (stack_a != NULL)
-		ft_list_clear(&stack_a, free);
-	if (stack_b != NULL)
-		ft_list_clear(&stack_b, free);
-	if (ops != NULL)
-		ft_free_tab(ops);
-	if (visualizer != NULL)
-		destroy_visualizer(visualizer);
-	exit(0);
-}
-
-void			visualizer_error_quit(t_visualizer *visualizer,
-						t_list_node *stack_a, t_list_node *stack_b, void **ops)
-{
-	if (stack_a != NULL)
-		ft_list_clear(&stack_a, free);
-	if (stack_b != NULL)
-		ft_list_clear(&stack_b, free);
-	if (ops != NULL)
-		ft_free_tab(ops);
-	if (visualizer != NULL)
-		destroy_visualizer(visualizer);
-	exit(1);
+	if (sys->s_a != NULL)
+		ft_list_clear(&sys->s_a, free);
+	if (sys->s_b != NULL)
+		ft_list_clear(&sys->s_b, free);
+	if (sys->ops != NULL)
+		ft_list_clear(&sys->ops, free);
+	if (vz != NULL)
+		destroy_visualizer(vz);
+	free(sys);
+	exit(exit_nb);
 }

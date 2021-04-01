@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:25:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/29 16:41:36 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 12:07:11 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,38 +33,34 @@ t_bool			is_sort(t_list_node *stack_a, t_list_node *stack_b)
 	return (true);
 }
 
-void			**gen_instructions(t_list_node **stack_a, t_list_node **stack_b)
+void			gen_instructions(t_system *sys)
 {
-	void		**operations;
-
-	operations = ft_tab_new(0);
-	// if (is_in_following_order(*stack_a, &operations) == true)
-	// 	return (operations);
-	rev_push_sort(stack_a, stack_b, &operations);
-	return (operations);
+	if (is_in_crescent_order(sys->s_a))
+		return ;
+	rev_push_sort(&sys->s_a, &sys->s_b, &sys->ops);
 }
 
-void			send_instructions(void **operation)
+void			send_instructions(t_list_node *operation)
 {
-	int	index;
-	int	len;
+	t_list_node	*tmp;
 
-	index = 0;
-	len = ft_tab_len(operation);
-	while (index < len)
+	tmp = operation;
+	while (operation != NULL)
 	{
-		ft_putstr(operation[index]);
-		index++;
+		ft_putstr(operation->data);
+		operation = operation->next;
 	}
+	operation = tmp;
 }
 
-void			quit(t_list_node *stack_a, t_list_node *stack_b, void **ops)
+void			quit(t_system *sys)
 {
-	if (stack_a != NULL)
-		ft_list_clear(&stack_a, free);
-	if (stack_b != NULL)
-		ft_list_clear(&stack_b, free);
-	if (ops != NULL)
-		free(ops);
+	if (sys->s_a != NULL)
+		ft_list_clear(&sys->s_a, free);
+	if (sys->s_b != NULL)
+		ft_list_clear(&sys->s_b, free);
+	if (sys->ops != NULL)
+		ft_list_clear(&sys->ops, NULL);
+	free(sys);
 	exit(0);
 }

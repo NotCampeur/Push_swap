@@ -6,36 +6,36 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:35:34 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/25 17:22:55 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 15:01:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void		apply_operation(char **op, t_list_node **stack_a,
-				t_list_node **stack_b)
+void	apply_operation(t_list_node *op, t_list_node **s_a, t_list_node **s_b)
 {
-	int	i;
+	t_list_node *tmp;
 
-	i = 0;
-	while (op[i] != NULL)
+	tmp = op;
+	while (op != NULL)
 	{
-		if (ft_strcmp(op[i], "sa\n") == 1 || ft_strcmp(op[i], "ss\n") == 1)
-			swap_stack(stack_a);
-		if (ft_strcmp(op[i], "sb\n") == 1 || ft_strcmp(op[i], "ss\n") == 1)
-			swap_stack(stack_b);
-		if (ft_strcmp(op[i], "pa\n") == 1)
-			push_a(stack_a, stack_b);
-		if (ft_strcmp(op[i], "pb\n") == 1)
-			push_b(stack_a, stack_b);
-		if (ft_strcmp(op[i], "ra\n") == 1 || ft_strcmp(op[i], "rr\n") == 1)
-			rotate_a(stack_a);
-		if (ft_strcmp(op[i], "rb\n") == 1 || ft_strcmp(op[i], "rr\n") == 1)
-			rotate_b(stack_b);
-		if (ft_strcmp(op[i], "rra\n") == 1 || ft_strcmp(op[i], "rrr\n") == 1)
-			reverse_rotate_a(stack_a);
-		if (ft_strcmp(op[i], "rrb\n") == 1 || ft_strcmp(op[i], "rrr\n") == 1)
-			reverse_rotate_b(stack_b);
-		i++;
+		if (ft_strcmp(op->data, "sa\n") || ft_strcmp(op->data, "ss\n"))
+			swap_stack(s_a);
+		if (ft_strcmp(op->data, "sb\n") || ft_strcmp(op->data, "ss\n"))
+			swap_stack(s_b);
+		if (ft_strcmp(op->data, "pa\n"))
+			push_a(s_a, s_b);
+		if (ft_strcmp(op->data, "pb\n"))
+			push_b(s_a, s_b);
+		if (ft_strcmp(op->data, "ra\n") || ft_strcmp(op->data, "rr\n"))
+			rotate_a(s_a);
+		if (ft_strcmp(op->data, "rb\n") || ft_strcmp(op->data, "rr\n"))
+			rotate_b(s_b);
+		if (ft_strcmp(op->data, "rra\n") || ft_strcmp(op->data, "rrr\n"))
+			reverse_rotate_a(s_a);
+		if (ft_strcmp(op->data, "rrb\n") || ft_strcmp(op->data, "rrr\n"))
+			reverse_rotate_b(s_b);
+		op = op->next;
 	}
+	op = tmp;
 }

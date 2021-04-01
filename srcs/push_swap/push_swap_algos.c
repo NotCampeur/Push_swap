@@ -6,45 +6,13 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 10:56:05 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/31 14:33:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 12:09:28 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_smallest_a_on_b(t_list_node **s_a, t_list_node **s_b, void ***ops)
-{
-	if (*s_a != NULL && *s_b == NULL)
-	{
-		while (((t_node*)(*s_a)->data)->index != 0)
-		{
-			ft_add_to_tab("ra\n", ops);
-			rotate_a(s_a);
-		}
-	}
-	else if (*s_a != NULL)
-	{
-		while (((t_node*)(*s_a)->data)->index
-		!= ((t_node*)(*s_b)->data)->index + 1)
-		{
-			ft_add_to_tab("ra\n", ops);
-			rotate_a(s_a);
-		}
-	}
-	ft_add_to_tab("pb\n", ops);
-	push_b(s_a, s_b);
-}
-
-void	empty_stack(t_list_node **s_a, t_list_node **s_b, void ***ops)
-{
-	while (*s_a != NULL)
-	{
-		ft_add_to_tab("pa\n", ops);
-		push_a(s_a, s_b);
-	}
-}
-
-void	push_untagged(t_list_node **s_a, t_list_node **s_b, void ***ops)
+void	push_untagged(t_list_node **s_a, t_list_node **s_b, t_list_node	**ops)
 {
 	int			count;
 	t_list_node	*tmp;
@@ -91,7 +59,7 @@ void	push_untagged(t_list_node **s_a, t_list_node **s_b, void ***ops)
 				))
 			{
 				((t_node*)(*s_a)->next->data)->tag = true;
-				ft_add_to_tab("sa\n", ops);
+				ft_list_add_back(ops, ft_malloc_node("sa\n"));
 				swap_stack(s_a);
 				count--;
 			}
@@ -111,7 +79,7 @@ void	push_untagged(t_list_node **s_a, t_list_node **s_b, void ***ops)
 			&& ((t_node*)(*s_a)->data)->index < ((t_node*)(tmp_2)->data)->index)
 			{
 				((t_node*)(*s_a)->data)->tag = true;
-				ft_add_to_tab("sa\n", ops);
+				ft_list_add_back(ops, ft_malloc_node("sa\n"));
 				swap_stack(s_a);
 				count--;
 			}
@@ -122,71 +90,45 @@ void	push_untagged(t_list_node **s_a, t_list_node **s_b, void ***ops)
 		}
 		else if (((t_node*)(*s_a)->data)->tag == false)
 		{
-			ft_add_to_tab("pb\n", ops);
+			ft_list_add_back(ops, ft_malloc_node("pb\n"));
 			push_b(s_a, s_b);
 			count--;
 		}
 		else if (((t_node*)(*s_a)->data)->tag == true)
 		{
-			ft_add_to_tab("ra\n", ops);
+			ft_list_add_back(ops, ft_malloc_node("ra\n"));
 			rotate_a(s_a);
 		}
 	}
 }
 
-void	execute_ops(t_list_node **s_a, t_list_node **s_b, char **ops)
+void	execute_ops(t_list_node **s_a, t_list_node **s_b, t_list_node *ops)
 {
-	int	i;
+	t_list_node *tmp;
 
-	i = 0;
-	while (ops[i] != NULL)
+	tmp = ops;
+	while (ops != NULL)
 	{
-		if (ft_strcmp(ops[i], "sa\n") == 1 || ft_strcmp(ops[i], "ss\n") == 1)
+		if (ft_strcmp(ops->data, "sa\n") || ft_strcmp(ops->data, "ss\n"))
 			swap_stack(s_a);
-		if (ft_strcmp(ops[i], "sb\n") == 1 || ft_strcmp(ops[i], "ss\n") == 1)
+		if (ft_strcmp(ops->data, "sb\n") || ft_strcmp(ops->data, "ss\n"))
 			swap_stack(s_b);
-		if (ft_strcmp(ops[i], "pa\n") == 1)
+		if (ft_strcmp(ops->data, "pa\n"))
 			push_a(s_a, s_b);
-		if (ft_strcmp(ops[i], "pb\n") == 1)
+		if (ft_strcmp(ops->data, "pb\n"))
 			push_b(s_a, s_b);
-		if (ft_strcmp(ops[i], "ra\n") == 1 || ft_strcmp(ops[i], "rr\n") == 1)
+		if (ft_strcmp(ops->data, "ra\n") || ft_strcmp(ops->data, "rr\n"))
 			rotate_a(s_a);
-		if (ft_strcmp(ops[i], "rb\n") == 1 || ft_strcmp(ops[i], "rr\n") == 1)
+		if (ft_strcmp(ops->data, "rb\n") || ft_strcmp(ops->data, "rr\n"))
 			rotate_b(s_b);
-		if (ft_strcmp(ops[i], "rra\n") == 1 || ft_strcmp(ops[i], "rrr\n") == 1)
+		if (ft_strcmp(ops->data, "rra\n") || ft_strcmp(ops->data, "rrr\n"))
 			reverse_rotate_a(s_a);
-		if (ft_strcmp(ops[i], "rrb\n") == 1 || ft_strcmp(ops[i], "rrr\n") == 1)
+		if (ft_strcmp(ops->data, "rrb\n") || ft_strcmp(ops->data, "rrr\n"))
 			reverse_rotate_b(s_b);
-		i++;
+		ops = ops->next;
 	}
+	ops = tmp;
 }
-
-// static void	undo_ops(t_list_node **s_a, t_list_node **s_b, char **ops)
-// {
-// 	int	i;
-
-// 	i = ft_tab_len((void**)ops) - 1;
-// 	while (i >= 0)
-// 	{
-// 		if (ft_strcmp(ops[i], "sa\n") == 1 || ft_strcmp(ops[i], "ss\n") == 1)
-// 			swap_stack(s_a);
-// 		if (ft_strcmp(ops[i], "sb\n") == 1 || ft_strcmp(ops[i], "ss\n") == 1)
-// 			swap_stack(s_b);
-// 		if (ft_strcmp(ops[i], "pa\n") == 1)
-// 			push_b(s_a, s_b);
-// 		if (ft_strcmp(ops[i], "pb\n") == 1)
-// 			push_a(s_a, s_b);
-// 		if (ft_strcmp(ops[i], "ra\n") == 1 || ft_strcmp(ops[i], "rr\n") == 1)
-// 			reverse_rotate_a(s_a);
-// 		if (ft_strcmp(ops[i], "rb\n") == 1 || ft_strcmp(ops[i], "rr\n") == 1)
-// 			reverse_rotate_b(s_b);
-// 		if (ft_strcmp(ops[i], "rra\n") == 1 || ft_strcmp(ops[i], "rrr\n") == 1)
-// 			rotate_a(s_a);
-// 		if (ft_strcmp(ops[i], "rrb\n") == 1 || ft_strcmp(ops[i], "rrr\n") == 1)
-// 			rotate_b(s_b);
-// 		i--;
-// 	}
-// }
 
 static int	find_target(t_list_node **s_a, t_list_node **s_b)
 {
@@ -220,17 +162,17 @@ static int	find_target(t_list_node **s_a, t_list_node **s_b)
 	return (result);
 }
 
-void	**moves_to_place(t_list_node **s_a, t_list_node **s_b, int *moves_needed
-																, int location)
+t_list_node	*moves_to_place(t_list_node **s_a, t_list_node **s_b
+							, int *moves_needed, int location)
 {
-	void		**result;
+	t_list_node *result;
 	int			target;
 	int			index;
 	t_list_node	*tmp_b;
 	int			size_a;
 	int			size_b;
 
-	result = ft_tab_new(0);
+	result = NULL;
 	target = 0;
 	index = 0;
 	tmp_b = *s_b;
@@ -242,11 +184,6 @@ void	**moves_to_place(t_list_node **s_a, t_list_node **s_b, int *moves_needed
 		index++;
 	}
 	target = find_target(s_a, s_b);
-	// ft_putstr_fd(2, "[");
-	// ft_putnbr_fd(2, location);
-	// ft_putstr_fd(2, "] location to [");
-	// ft_putnbr_fd(2, target);
-	// ft_putstr_fd(2, "] target \n");
 	*s_b = tmp_b;
 	if (target >= size_a / 2)
 	{
@@ -254,17 +191,14 @@ void	**moves_to_place(t_list_node **s_a, t_list_node **s_b, int *moves_needed
 		{
 			while (target < size_a && location < size_b)
 			{
-				ft_add_to_tab("rrr\n", &result);
-				// reverse_rotate_a(s_a);
-				// reverse_rotate_b(s_b);
+				ft_list_add_back(&result, ft_malloc_node("rrr\n"));
 				(*moves_needed)++;
 				target++;
 				location++;
 			}
 			while (location < size_b)
 			{
-				ft_add_to_tab("rrb\n", &result);
-				// reverse_rotate_b(s_b);
+				ft_list_add_back(&result, ft_malloc_node("rrb\n"));
 				(*moves_needed)++;
 				location++;
 			}
@@ -273,16 +207,14 @@ void	**moves_to_place(t_list_node **s_a, t_list_node **s_b, int *moves_needed
 		{
 			while (location > 0)
 			{
-				ft_add_to_tab("rb\n", &result);
-				// rotate_b(s_b);
+				ft_list_add_back(&result, ft_malloc_node("rb\n"));
 				(*moves_needed)++;
 				location--;
 			}
 		}
 		while (target < size_a)
 		{
-			ft_add_to_tab("rra\n", &result);
-			// reverse_rotate_a(s_a);
+			ft_list_add_back(&result, ft_malloc_node("rra\n"));
 			(*moves_needed)++;
 			target++;
 		}
@@ -293,17 +225,14 @@ void	**moves_to_place(t_list_node **s_a, t_list_node **s_b, int *moves_needed
 		{
 			while (target > 0 && location > 0)
 			{
-				ft_add_to_tab("rr\n", &result);
-				// rotate_a(s_a);
-				// rotate_b(s_b);
+				ft_list_add_back(&result, ft_malloc_node("rr\n"));
 				(*moves_needed)++;
 				target--;
 				location--;
 			}
 			while (location > 0)
 			{
-				ft_add_to_tab("rb\n", &result);
-				// rotate_b(s_b);
+				ft_list_add_back(&result, ft_malloc_node("rb\n"));
 				(*moves_needed)++;
 				location--;
 			}
@@ -312,38 +241,37 @@ void	**moves_to_place(t_list_node **s_a, t_list_node **s_b, int *moves_needed
 		{
 			while (location < size_b && location != 0)
 			{
-				ft_add_to_tab("rrb\n", &result);
-				// reverse_rotate_b(s_b);
+				ft_list_add_back(&result, ft_malloc_node("rrb\n"));
 				(*moves_needed)++;
 				location++;
 			}
 		}
 		while (target > 0)
 		{
-			ft_add_to_tab("ra\n", &result);
-			// rotate_a(s_a);
+			ft_list_add_back(&result, ft_malloc_node("ra\n"));
 			(*moves_needed)++;
 			target--;
 		}
 	}
 	
-	ft_add_to_tab("pa\n", &result);
-	// push_a(s_a, s_b);
+	ft_list_add_back(&result, ft_malloc_node("pa\n"));
 	(*moves_needed)++;
-	// undo_ops(s_a, s_b, (char**)result);
 	return (result);
 }
 
-void	move_the_best_value(t_list_node **s_a, t_list_node **s_b, void ***ops)
+void	move_the_best_value(t_list_node **s_a,
+										t_list_node **s_b, t_list_node	**ops)
 {
-	int		minimal_moves;
-	int		moves_needed;
-	int		index;
-	void	**ops_to_do;
-	void	**best_ops;
+	int			minimal_moves;
+	int			moves_needed;
+	int			index;
+	t_list_node	*ops_to_do;
+	t_list_node	*best_ops;
+	t_list_node	*tmp;
 
 	minimal_moves = INT_MAX;
 	index = ft_list_size(*s_b) - 1;
+	ops_to_do = NULL;
 	best_ops = NULL;
 	while (index >= 0)
 	{
@@ -351,25 +279,24 @@ void	move_the_best_value(t_list_node **s_a, t_list_node **s_b, void ***ops)
 		ops_to_do = moves_to_place(s_a, s_b, &moves_needed, index);
 		if (minimal_moves > moves_needed)
 		{
-			free(best_ops);
-			best_ops = ft_tab_new(ft_tab_len(ops_to_do));
-			ft_tab_cpy(best_ops, ops_to_do);
+			ft_list_clear(&best_ops, NULL);
+			tmp = ops_to_do;
+			while (ops_to_do != NULL)
+			{
+				ft_list_add_back(&best_ops, ft_malloc_node(ops_to_do->data));
+				ops_to_do = ops_to_do->next;
+			}
+			ops_to_do = tmp;
 			minimal_moves = moves_needed;
 		}
-		free(ops_to_do);
+		ft_list_clear(&ops_to_do, NULL);
 		index--;
 	}
-	execute_ops(s_a, s_b, (char**)best_ops);
-	index = 0;
-	while (best_ops[index] != NULL)
-	{
-		ft_add_to_tab(best_ops[index], ops);
-		index++;
-	}
-	free(best_ops);
+	execute_ops(s_a, s_b, best_ops);
+	ft_list_add_back(ops, best_ops);
 }
 
-static void	order_stack(t_list_node **s_a, void ***ops)
+static void	order_stack(t_list_node **s_a, t_list_node	**ops)
 {
 	t_list_node	*tmp;
 	int			pos;
@@ -390,7 +317,7 @@ static void	order_stack(t_list_node **s_a, void ***ops)
 	{
 		while (pos < size_a)
 		{
-			ft_add_to_tab("rra\n", ops);
+			ft_list_add_back(ops, ft_malloc_node("rra\n"));
 			reverse_rotate_a(s_a);
 			pos++;
 		}
@@ -399,14 +326,14 @@ static void	order_stack(t_list_node **s_a, void ***ops)
 	{
 		while (pos > 0)
 		{
-			ft_add_to_tab("ra\n", ops);
+			ft_list_add_back(ops, ft_malloc_node("ra\n"));
 			rotate_a(s_a);
 			pos--;
 		}
 	}
 }
 
-void	rev_push_sort(t_list_node **s_a, t_list_node **s_b, void ***ops)
+void	rev_push_sort(t_list_node **s_a, t_list_node **s_b, t_list_node	**ops)
 {
 	push_untagged(s_a, s_b, ops);
 	// ft_putstr_fd(2, "Untaggeds pushed, list size = [");

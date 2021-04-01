@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 15:15:07 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/25 14:08:11 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 14:57:56 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*
 ** Read STDIN until a \n is catch
 */
-void			**get_instructions(void);
+t_list_node		*get_instructions(void);
 
 /*
 ** Will index the arguments of the stack in crescent order.
@@ -38,5 +38,10 @@ t_list_node		*init_stack(int argc, char **args);
 ** Check if the program can properly work with the given params
 */
 int				parse_args(int argc, char *argv[]);
+
+/*
+** Initialize the system structure for futur uses.
+*/
+t_system		*system_init(void);
 
 #endif

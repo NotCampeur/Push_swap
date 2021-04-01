@@ -6,54 +6,11 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:49:33 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/31 13:15:33 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 14:45:11 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
-// static void		nodes_markup_value(t_node **nodes, int size)
-// {
-// 	int	j;
-// 	int	tag_nb;
-// 	int	max_value;
-
-// 	j = find_markup_head(nodes, size);
-// 	tag_nb = 0;
-// 	max_value = nodes[j]->value;
-// 	nodes[j]->tag = true;
-			// ft_putstr_fd(2, "[");
-			// ft_putnbr_fd(2, j);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[j]->index);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[j]->value);
-			// ft_putstr_fd(2, "]\n");
-// 	j++;
-// 	while (j < size)
-// 	{
-// 		if (max_value < nodes[j]->value)
-// 		{
-			// ft_putstr_fd(2, "[");
-			// ft_putnbr_fd(2, j);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[j]->index);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[j]->value);
-			// ft_putstr_fd(2, "]\n");
-// 			max_value = nodes[j]->value;
-// 			nodes[j]->tag = true;
-// 			tag_nb++;
-// 		}
-// 		// if (nodes[i]->index == nodes[j]->index - 1 - tag_nb)
-// 		// {
-// 		// 	nodes[j]->tag = true;
-// 		// 	tag_nb++;
-// 		// }
-// 		j++;
-// 	}
-// }
 
 static int		markup_with_value(t_node **nodes, int size, int *tag_max)
 {
@@ -87,11 +44,6 @@ static int		markup_with_value(t_node **nodes, int size, int *tag_max)
 		}
 		i++;
 	}
-	// ft_putstr_fd(2, "markup_head = [");
-	// ft_putnbr_fd(2, m_h_index);
-	// ft_putstr_fd(2, "] with (");
-	// ft_putnbr_fd(2, *tag_max);
-	// ft_putstr_fd(2, ")\n");
 	return (m_h_index);
 }
 
@@ -127,11 +79,6 @@ static int		markup_with_index(t_node **nodes, int size, int *tag_max)
 		}
 		i++;
 	}
-	// ft_putstr_fd(2, "markup_head = [");
-	// ft_putnbr_fd(2, m_h_index);
-	// ft_putstr_fd(2, "] with (");
-	// ft_putnbr_fd(2, tag_max + 1);
-	// ft_putstr_fd(2, ")\n");
 	return (m_h_index);
 }
 
@@ -170,13 +117,6 @@ static void		nodes_markup(t_node **nodes, int size)
 	else
 		last_index = nodes[j]->value;
 	nodes[j]->tag = true;
-			// ft_putstr_fd(2, "[");
-			// ft_putnbr_fd(2, j);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[j]->index);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[j]->value);
-			// ft_putstr_fd(2, "]\n");
 	j++;
 	while (j < size)
 	{
@@ -184,13 +124,6 @@ static void		nodes_markup(t_node **nodes, int size)
 		{
 			if (last_index + 1 == nodes[j]->index)
 			{
-				// ft_putstr_fd(2, "[");
-				// ft_putnbr_fd(2, j);
-				// ft_putstr_fd(2, "|");
-				// ft_putnbr_fd(2, nodes[j]->index);
-				// ft_putstr_fd(2, "|");
-				// ft_putnbr_fd(2, nodes[j]->value);
-				// ft_putstr_fd(2, "]\n");
 				last_index++;
 				nodes[j]->tag = true;
 				tag_nb++;
@@ -200,13 +133,6 @@ static void		nodes_markup(t_node **nodes, int size)
 		{
 			if (last_index < nodes[j]->value)
 			{
-				// ft_putstr_fd(2, "[");
-				// ft_putnbr_fd(2, j);
-				// ft_putstr_fd(2, "|");
-				// ft_putnbr_fd(2, nodes[j]->index);
-				// ft_putstr_fd(2, "|");
-				// ft_putnbr_fd(2, nodes[j]->value);
-				// ft_putstr_fd(2, "]\n");
 				last_index = nodes[j]->value;
 				nodes[j]->tag = true;
 				tag_nb++;
@@ -227,13 +153,6 @@ static void		nodes_markup(t_node **nodes, int size)
 	{
 		if (last_index < nodes[j]->index)
 		{
-			// ft_putstr_fd(2, "[");
-			// ft_putnbr_fd(2, j);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[j]->index);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[j]->value);
-			// ft_putstr_fd(2, "]\n");
 			last_index = nodes[j]->index;
 			nodes[j]->tag = true;
 			tag_nb++;
@@ -247,13 +166,6 @@ static void		nodes_markup(t_node **nodes, int size)
 	{
 		if (last_index > nodes[i - j]->index)
 		{
-			// ft_putstr_fd(2, "[");
-			// ft_putnbr_fd(2, i - j);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[i - j]->index);
-			// ft_putstr_fd(2, "|");
-			// ft_putnbr_fd(2, nodes[i - j]->value);
-			// ft_putstr_fd(2, "]\n");
 			last_index = nodes[i - j]->index;
 			nodes[i - j]->tag = true;
 		}
@@ -330,5 +242,16 @@ t_list_node		*init_stack(int argc, char **argv)
 		index++;
 	}
 	free(nodes);
+	return (result);
+}
+
+t_system		*system_init(void)
+{
+	t_system	*result;
+
+	result = (t_system*)malloc(sizeof(t_system));
+	result->s_a = NULL;
+	result->s_b = NULL;
+	result->ops = NULL;
 	return (result);
 }

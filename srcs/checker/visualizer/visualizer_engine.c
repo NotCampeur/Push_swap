@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 14:31:11 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/30 14:44:57 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 15:20:51 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ static void	draw_stacks_size(t_visualizer *vz, t_list_node **s_a,
 	op_count = ft_itoa(op);
 	draw_text(vz, s_a_size, rect_init(10, 10, ft_strlen(s_a_size) * 14, 50),
 			color_init(0, 0, 255));
-	draw_text(vz, s_b_size, rect_init(S_WD - 10 - ft_strlen(s_b_size) * 14, 10,
-			ft_strlen(s_b_size) * 14, 50), color_init(0, 0, 255));
-	draw_text(vz, op_count, rect_init(S_WD / 2 - (ft_strlen(op_count) * 14) / 2,
-			10, ft_strlen(op_count) * 14, 50), color_init(255, 255, 255));
+	draw_text(vz, s_b_size, rect_init(S_WD - vz->s_wd - 10 - ft_strlen(s_b_size)
+				* 14, 10, ft_strlen(s_b_size) * 14, 50), color_init(0, 0, 255));
+	draw_text(vz, op_count, rect_init((S_WD - vz->s_wd) / 2 -
+		(ft_strlen(op_count) * 14) / 2, 10, ft_strlen(op_count) * 14, 50)
+		, color_init(255, 255, 255));
 	free(s_a_size);
 	free(s_b_size);
 	free(op_count);
@@ -88,16 +89,18 @@ void		draw_stacks(t_visualizer *vz, t_list_node **s_a, t_list_node **s_b)
 		color_init(255, 155, 0));
 }
 
-void		visualize_operation(char **op, t_list_node **stack_a,
+void		visualize_operation(t_list_node *op, t_list_node **stack_a,
 				t_list_node **stack_b, t_visualizer *visualizer)
 {
-	int			i;
+	t_list_node	*tmp;
 	SDL_Event	e;
 	t_bool		step;
+	int			i;
 
+	tmp = op;
 	step = false;
 	i = 0;
-	while (1)
+	while (visualizer->run == true || op != NULL)
 	{
 		draw_stacks_size(visualizer, stack_a, stack_b, i);
 		draw_stacks(visualizer, stack_a, stack_b);
@@ -112,29 +115,29 @@ void		visualize_operation(char **op, t_list_node **stack_a,
 		}
 		if (visualizer->run == true || step == true)
 		{
-			if (op[i] != NULL)
+			if (op != NULL)
 			{
-				if (ft_strcmp(op[i], "sa\n") == 1 || ft_strcmp(op[i], "ss\n") == 1)
+				if (ft_strcmp(op->data, "sa\n") || ft_strcmp(op->data, "ss\n"))
 					swap_stack(stack_a);
-				if (ft_strcmp(op[i], "sb\n") == 1 || ft_strcmp(op[i], "ss\n") == 1)
+				if (ft_strcmp(op->data, "sb\n") || ft_strcmp(op->data, "ss\n"))
 					swap_stack(stack_b);
-				if (ft_strcmp(op[i], "pa\n") == 1)
+				if (ft_strcmp(op->data, "pa\n"))
 					push_a(stack_a, stack_b);
-				if (ft_strcmp(op[i], "pb\n") == 1)
+				if (ft_strcmp(op->data, "pb\n"))
 					push_b(stack_a, stack_b);
-				if (ft_strcmp(op[i], "ra\n") == 1 || ft_strcmp(op[i], "rr\n") == 1)
+				if (ft_strcmp(op->data, "ra\n") || ft_strcmp(op->data, "rr\n"))
 					rotate_a(stack_a);
-				if (ft_strcmp(op[i], "rb\n") == 1 || ft_strcmp(op[i], "rr\n") == 1)
+				if (ft_strcmp(op->data, "rb\n") || ft_strcmp(op->data, "rr\n"))
 					rotate_b(stack_b);
-				if (ft_strcmp(op[i], "rra\n") == 1 || ft_strcmp(op[i], "rrr\n") == 1)
+				if (ft_strcmp(op->data, "rra\n") || ft_strcmp(op->data, "rrr\n"))
 					reverse_rotate_a(stack_a);
-				if (ft_strcmp(op[i], "rrb\n") == 1 || ft_strcmp(op[i], "rrr\n") == 1)
+				if (ft_strcmp(op->data, "rrb\n") || ft_strcmp(op->data, "rrr\n"))
 					reverse_rotate_b(stack_b);
 				i++;
+				op = op->next;
 			}
 			step = false;
 		}
-		else if (visualizer->run == false && op[i] == NULL)
-			return ;
 	}
+	op = tmp;
 }

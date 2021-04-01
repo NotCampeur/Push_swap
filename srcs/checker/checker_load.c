@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:21:18 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/03/25 17:54:19 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/01 14:45:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,16 @@ t_list_node		*init_stack(int argc, char **args)
 		index++;
 	}
 	free(nodes);
+	return (result);
+}
+
+t_system		*system_init(void)
+{
+	t_system	*result;
+
+	result = (t_system*)malloc(sizeof(t_system));
+	result->s_a = NULL;
+	result->s_b = NULL;
+	result->ops = NULL;
 	return (result);
 }
