@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 11:51:21 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/01 15:33:27 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/02 09:24:37 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int				main(int argc, char *argv[])
 {
-
 	t_system		*sys;
 	t_visualizer	*visualizer;
 
@@ -33,7 +32,7 @@ int				main(int argc, char *argv[])
 		ft_putstr_fd(2, FT_BOLD_RED"Error\n"FT_BASIC);
 		visualizer_quit(visualizer, sys, EXIT_FAILURE);
 	}
-	visualize_operation(sys->ops, &sys->s_a, &sys->s_b, visualizer);
+	visualize_operation(sys, visualizer);
 	resolution(sys->s_a, sys->s_b);
 	visualizer_quit(visualizer, sys, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);

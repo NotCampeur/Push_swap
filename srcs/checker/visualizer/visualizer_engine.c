@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 14:31:11 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/01 15:20:51 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/02 09:43:10 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,49 @@ void		draw_stacks(t_visualizer *vz, t_list_node **s_a, t_list_node **s_b)
 		color_init(255, 155, 0));
 }
 
-void		visualize_operation(t_list_node *op, t_list_node **stack_a,
-				t_list_node **stack_b, t_visualizer *visualizer)
+static void	execute_ops(t_system *sys, t_bool *step, int *i)
+{
+	void	*data;
+
+	if (sys->ops != NULL)
+	{
+		data = sys->ops->data;
+		if (ft_strcmp(data, "sa\n") == 1 || ft_strcmp(data, "ss\n") == 1)
+			swap_stack(&sys->s_a);
+		if (ft_strcmp(data, "sb\n") == 1 || ft_strcmp(data, "ss\n") == 1)
+			swap_stack(&sys->s_b);
+		if (ft_strcmp(data, "pa\n") == 1)
+			push_a(&sys->s_a, &sys->s_b);
+		if (ft_strcmp(data, "pb\n") == 1)
+			push_b(&sys->s_a, &sys->s_b);
+		if (ft_strcmp(data, "ra\n") == 1 || ft_strcmp(data, "rr\n") == 1)
+			rotate_a(&sys->s_a);
+		if (ft_strcmp(data, "rb\n") == 1 || ft_strcmp(data, "rr\n") == 1)
+			rotate_b(&sys->s_b);
+		if (ft_strcmp(data, "rra\n") == 1 || ft_strcmp(data, "rrr\n") == 1)
+			reverse_rotate_a(&sys->s_a);
+		if (ft_strcmp(data, "rrb\n") == 1 || ft_strcmp(data, "rrr\n") == 1)
+			reverse_rotate_b(&sys->s_b);
+		(*i)++;
+		sys->ops = sys->ops->next;
+	}
+	*step = false;
+}
+
+void		visualize_operation(t_system *sys, t_visualizer *visualizer)
 {
 	t_list_node	*tmp;
 	SDL_Event	e;
 	t_bool		step;
 	int			i;
 
-	tmp = op;
+	tmp = sys->ops;
 	step = false;
 	i = 0;
-	while (visualizer->run == true || op != NULL)
+	while (visualizer->run == true || sys->ops != NULL)
 	{
-		draw_stacks_size(visualizer, stack_a, stack_b, i);
-		draw_stacks(visualizer, stack_a, stack_b);
+		draw_stacks_size(visualizer, &sys->s_a, &sys->s_b, i);
+		draw_stacks(visualizer, &sys->s_a, &sys->s_b);
 		if (SDL_PollEvent(&e) == 1 && e.type == SDL_KEYDOWN)
 		{
 			if (e.key.keysym.sym == SDLK_SPACE && visualizer->run == true)
@@ -114,30 +142,7 @@ void		visualize_operation(t_list_node *op, t_list_node **stack_a,
 				step = true;
 		}
 		if (visualizer->run == true || step == true)
-		{
-			if (op != NULL)
-			{
-				if (ft_strcmp(op->data, "sa\n") || ft_strcmp(op->data, "ss\n"))
-					swap_stack(stack_a);
-				if (ft_strcmp(op->data, "sb\n") || ft_strcmp(op->data, "ss\n"))
-					swap_stack(stack_b);
-				if (ft_strcmp(op->data, "pa\n"))
-					push_a(stack_a, stack_b);
-				if (ft_strcmp(op->data, "pb\n"))
-					push_b(stack_a, stack_b);
-				if (ft_strcmp(op->data, "ra\n") || ft_strcmp(op->data, "rr\n"))
-					rotate_a(stack_a);
-				if (ft_strcmp(op->data, "rb\n") || ft_strcmp(op->data, "rr\n"))
-					rotate_b(stack_b);
-				if (ft_strcmp(op->data, "rra\n") || ft_strcmp(op->data, "rrr\n"))
-					reverse_rotate_a(stack_a);
-				if (ft_strcmp(op->data, "rrb\n") || ft_strcmp(op->data, "rrr\n"))
-					reverse_rotate_b(stack_b);
-				i++;
-				op = op->next;
-			}
-			step = false;
-		}
+			execute_ops(sys, &step, &i);
 	}
-	op = tmp;
+	sys->ops = tmp;
 }

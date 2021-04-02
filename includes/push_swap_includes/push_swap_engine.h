@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:31:14 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/01 11:35:58 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/02 13:07:05 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void		gen_instructions(t_system *sys);
 void		send_instructions(t_list_node *operation);
 
 /*
-** Will exit properly by freeing what needs to be.
+** Will exit properly by freeing what needs to be. return code : exit_nb
 */
-void		quit(t_system *sys);
+void	quit(t_system *sys, int exit_nb);
 
 #endif

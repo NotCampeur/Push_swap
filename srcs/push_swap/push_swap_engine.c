@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:25:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/01 12:07:11 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/02 13:06:38 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void			send_instructions(t_list_node *operation)
 	operation = tmp;
 }
 
-void			quit(t_system *sys)
+void			quit(t_system *sys, int exit_nb)
 {
 	if (sys->s_a != NULL)
 		ft_list_clear(&sys->s_a, free);
@@ -62,5 +62,5 @@ void			quit(t_system *sys)
 	if (sys->ops != NULL)
 		ft_list_clear(&sys->ops, NULL);
 	free(sys);
-	exit(0);
+	exit(exit_nb);
 }

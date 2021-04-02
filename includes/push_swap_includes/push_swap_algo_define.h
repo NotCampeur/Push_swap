@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_main.c                                   :+:      :+:    :+:   */
+/*   push_swap_algo_define.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 15:40:31 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/02 13:04:36 by ldutriez         ###   ########.fr       */
+/*   Created: 2021/04/02 12:50:39 by ldutriez          #+#    #+#             */
+/*   Updated: 2021/04/02 12:51:52 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PUSH_SWAP_ALGO_DEFINE_H
+# define PUSH_SWAP_ALGO_DEFINE_H
 
-int		main(int argc, char *argv[])
-{
-	t_system	*sys;
+# define RESULT 0
+# define INDEX 1
+# define SMALLEST_INDEX 2
+# define SMALLEST_POS 3
 
-	sys = system_init();
-	if (parse_args(argc, argv) == EXIT_FAILURE)
-		quit(sys, EXIT_FAILURE);
-	sys->s_a = init_stack(argc - 1, argv + 1);
-	if (sys->s_a == NULL)
-		quit(sys, EXIT_FAILURE);
-	sys->s_b = NULL;
-	gen_instructions(sys);
-	send_instructions(sys->ops);
-	quit(sys, EXIT_SUCCESS);
-	return (EXIT_SUCCESS);
-}
+#endif

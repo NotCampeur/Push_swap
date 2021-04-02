@@ -6,12 +6,17 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 11:00:39 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/01 14:35:33 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/02 10:13:27 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_ALGOS_H
 # define PUSH_SWAP_ALGOS_H
+
+/*
+** Will order the stack according to the position of the minimal value
+*/
+void		order_stack(t_list_node **s_a, t_list_node	**ops);
 
 /*
 ** Will check the string value of operations and call functions accordingly.
