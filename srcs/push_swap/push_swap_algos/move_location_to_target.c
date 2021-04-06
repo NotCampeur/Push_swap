@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 12:37:08 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/02 12:54:18 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:42:13 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ static int		find_target(t_list_node **s_a, t_list_node *s_b)
 static void		move_location_to_zero(int poses[2], t_list_node **ops
 																, int *moves)
 {
-	while (poses[1] > 0)
+	if (poses[1] > 0)
 	{
 		ft_list_add_back(ops, ft_malloc_node("rb\n"));
 		(*moves)++;
 		poses[1]--;
+		move_location_to_zero(poses, ops, moves);
 	}
 }
 

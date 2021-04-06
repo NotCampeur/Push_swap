@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/31 10:32:05 by ldutriez          #+#    #+#              #
-#    Updated: 2021/04/01 12:09:56 by ldutriez         ###   ########.fr        #
+#    Updated: 2021/04/06 15:19:30 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,15 @@
 
 MAX=0
 ITERATIONS=0
-LIMIT=5500
-FILE=problem_500
+LIMIT=700
+FILE=problem_100
 SUM=0
 
 echo "___Debug file___" > $FILE
-for i in {1..100}
+for i in {1..1000}
 do
 		# ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
-		./stack_gen 500 > stack.txt
+		./stack_gen 100 > stack.txt
 		ARG=$(cat stack.txt)
 		if ./push_swap $ARG | ./checker $ARG | grep -q KO
 		then

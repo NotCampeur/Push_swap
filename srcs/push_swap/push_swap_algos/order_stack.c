@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 10:09:46 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/02 10:29:43 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/06 15:07:16 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 static void	pos_is_near_end(t_list_node **s_a, t_list_node **ops
 														, int pos, int size_a)
 {
-	while (pos < size_a)
+	if (pos < size_a)
 	{
 		ft_list_add_back(ops, ft_malloc_node("rra\n"));
 		reverse_rotate_a(s_a);
-		pos++;
+		pos_is_near_end(s_a, ops, pos + 1, size_a);
 	}
 }
 
 static void	pos_is_near_start(t_list_node **s_a, t_list_node **ops, int pos)
 {
-	while (pos > 0)
+	if (pos > 0)
 	{
 		ft_list_add_back(ops, ft_malloc_node("ra\n"));
 		rotate_a(s_a);
-		pos--;
+		pos_is_near_start(s_a, ops, pos - 1);
 	}
 }
 

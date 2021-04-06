@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:25:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/02 13:06:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:38:11 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void			gen_instructions(t_system *sys)
 {
 	if (is_in_crescent_order(sys->s_a))
 		return ;
-	rev_push_sort(&sys->s_a, &sys->s_b, &sys->ops);
+	push_untagged(&sys->s_a, &sys->s_b, &sys->ops);
+	rev_push_sort(sys);
+	order_stack(&sys->s_a, &sys->ops);
 }
 
 void			send_instructions(t_list_node *operation)

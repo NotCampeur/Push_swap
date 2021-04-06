@@ -6,18 +6,16 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 10:56:05 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/02 12:43:55 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/06 14:55:13 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		execute_ops(t_list_node **s_a, t_list_node **s_b, t_list_node *ops)
+void				execute_ops(t_list_node **s_a, t_list_node **s_b
+														, t_list_node *ops)
 {
-	t_list_node *tmp;
-
-	tmp = ops;
-	while (ops != NULL)
+	if (ops != NULL)
 	{
 		if (ft_strcmp(ops->data, "sa\n") || ft_strcmp(ops->data, "ss\n"))
 			swap_stack(s_a);
@@ -36,45 +34,46 @@ void		execute_ops(t_list_node **s_a, t_list_node **s_b, t_list_node *ops)
 		if (ft_strcmp(ops->data, "rrb\n") || ft_strcmp(ops->data, "rrr\n"))
 			reverse_rotate_b(s_b);
 		ops = ops->next;
+		execute_ops(s_a, s_b, ops);
 	}
-	ops = tmp;
 }
 
-void		move_the_best_value(t_list_node **s_a, t_list_node **s_b
-														, t_list_node **ops)
+static t_list_node	*catch_best_value(t_system *sys, int index, int minimal_moves
+														, t_list_node *result)
 {
-	int			minimal_moves;
 	int			moves_needed;
-	int			index;
 	t_list_node	*ops_to_do;
-	t_list_node	*best_ops;
-
-	minimal_moves = INT_MAX;
-	index = ft_list_size(*s_b) - 1;
-	best_ops = NULL;
-	while (index >= 0)
+	
+	moves_needed = 0;
+	ops_to_do = moves_to_place(&sys->s_a, &sys->s_b, &moves_needed, index);
+	if (moves_needed < minimal_moves)
 	{
-		moves_needed = 0;
-		ops_to_do = moves_to_place(s_a, s_b, &moves_needed, index);
-		if (minimal_moves > moves_needed)
-		{
-			ft_list_clear(&best_ops, NULL);
-			ft_list_add_back(&best_ops, ops_to_do);
-			minimal_moves = moves_needed;
-		}
-		else
-			ft_list_clear(&ops_to_do, NULL);
-		index--;
+		ft_list_clear(&result, NULL);
+		ft_list_add_back(&result, ops_to_do);
+		minimal_moves = moves_needed;
 	}
-	execute_ops(s_a, s_b, best_ops);
-	ft_list_add_back(ops, best_ops);
+	else
+		ft_list_clear(&ops_to_do, NULL);
+	if (index > 0)
+		return (catch_best_value(sys, index - 1, minimal_moves, result));
+	return (result);
 }
 
-void		rev_push_sort(t_list_node **s_a, t_list_node **s_b
-															, t_list_node **ops)
+void				move_the_best_value(t_system *sys)
 {
-	push_untagged(s_a, s_b, ops);
-	while (*s_b != NULL)
-		move_the_best_value(s_a, s_b, ops);
-	order_stack(s_a, ops);
+	t_list_node	*best_ops;
+	t_list_node *tmp;
+	
+	best_ops = catch_best_value(sys, ft_list_size(sys->s_b) - 1, INT_MAX, NULL);
+	tmp = best_ops;
+	execute_ops(&sys->s_a, &sys->s_b, best_ops);
+	best_ops = tmp;
+	ft_list_add_back(&sys->ops, best_ops);
+}
+
+void		rev_push_sort(t_system *sys)
+{
+	move_the_best_value(sys);
+	if (sys->s_b != NULL)
+		rev_push_sort(sys);
 }
