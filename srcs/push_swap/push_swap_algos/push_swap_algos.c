@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 10:56:05 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/06 14:55:13 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:50:11 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void				execute_ops(t_list_node **s_a, t_list_node **s_b
 	}
 }
 
-static t_list_node	*catch_best_value(t_system *sys, int index, int minimal_moves
-														, t_list_node *result)
+static t_list_node	*catch_best_value(t_system *sys, int index
+									, int minimal_moves, t_list_node *result)
 {
 	int			moves_needed;
 	t_list_node	*ops_to_do;
-	
+
 	moves_needed = 0;
 	ops_to_do = moves_to_place(&sys->s_a, &sys->s_b, &moves_needed, index);
 	if (moves_needed < minimal_moves)
@@ -63,7 +63,7 @@ void				move_the_best_value(t_system *sys)
 {
 	t_list_node	*best_ops;
 	t_list_node *tmp;
-	
+
 	best_ops = catch_best_value(sys, ft_list_size(sys->s_b) - 1, INT_MAX, NULL);
 	tmp = best_ops;
 	execute_ops(&sys->s_a, &sys->s_b, best_ops);
@@ -71,9 +71,11 @@ void				move_the_best_value(t_system *sys)
 	ft_list_add_back(&sys->ops, best_ops);
 }
 
-void		rev_push_sort(t_system *sys)
+void				rev_push_sort(t_system *sys)
 {
-	move_the_best_value(sys);
 	if (sys->s_b != NULL)
+	{
+		move_the_best_value(sys);
 		rev_push_sort(sys);
+	}
 }

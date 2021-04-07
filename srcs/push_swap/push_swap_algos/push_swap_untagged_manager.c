@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:28:03 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/06 12:02:00 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/07 18:01:39 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ static void	is_true_and_swappable(t_list_node **s_a, t_list_node **ops
 		tmp = ft_list_get_node(s_a, INT_MAX);
 		if (((t_node*)(*s_a)->data)->index
 										> ((t_node*)(*s_a)->next->data)->index
-		&& (((t_node*)(*s_a)->next->data)->index > ((t_node*)tmp->data)->index))
+		&& ((((t_node*)(*s_a)->next->data)->index > ((t_node*)tmp->data)->index)
+			|| (((t_node*)tmp->data)->index == (ft_list_size(*s_a))
+			&& ((t_node*)(*s_a)->next->data)->index == 0)))
 		{
 			((t_node*)(*s_a)->next->data)->tag = true;
 			ft_list_add_back(ops, ft_malloc_node("sa\n"));
@@ -60,12 +62,9 @@ static void	is_false_and_swappable(t_list_node **s_a, t_list_node **ops
 		&& ((t_node*)(*s_a)->data)->tag == false
 		&& ((t_node*)(*s_a)->next->data)->tag == true)
 	{
-		tmp = *s_a;
-		tmp = tmp->next->next;
+		tmp = (*s_a)->next->next;
 		while (tmp != NULL && ((t_node*)(tmp)->data)->tag == false)
-		{
 			tmp = tmp->next;
-		}
 		if (tmp != NULL
 		&& ((t_node*)(*s_a)->data)->index > ((t_node*)(*s_a)->next->data)->index
 		&& ((t_node*)(*s_a)->data)->index < ((t_node*)(tmp)->data)->index)
@@ -82,24 +81,28 @@ void		push_untagged(t_list_node **s_a, t_list_node **s_b
 															, t_list_node **ops)
 {
 	int			count;
+	int			l_size;
 
 	count = count_untagged(*s_a);
+	l_size = ft_list_size(*s_a);
 	while (count > 0)
 	{
 		is_true_and_swappable(s_a, ops, &count);
 		is_false_and_swappable(s_a, ops, &count);
 		if (is_in_crescent_order(*s_a) == true)
 			count = 0;
-		else if (((t_node*)(*s_a)->data)->tag == false)
+		else if (((t_node*)(*s_a)->data)->tag == false && l_size > 2)
 		{
 			ft_list_add_back(ops, ft_malloc_node("pb\n"));
 			push_b(s_a, s_b);
+			l_size--;
 			count--;
 		}
-		else if (((t_node*)(*s_a)->data)->tag == true)
+		else if (((t_node*)(*s_a)->data)->tag == true || l_size == 2)
 		{
 			ft_list_add_back(ops, ft_malloc_node("ra\n"));
 			rotate_a(s_a);
+			count = (l_size == 2) ? 0 : count;
 		}
 	}
 }

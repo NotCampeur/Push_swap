@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:13:40 by ldutriez          #+#    #+#              #
-#    Updated: 2021/04/02 12:44:13 by ldutriez         ###   ########.fr        #
+#    Updated: 2021/04/07 16:24:57 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ CHECKER_SRC	=	checker_main.c \
 PUSH_SWAP_SRC =	push_swap_main.c \
 				swap.c push.c rotate.c reverse_rotate.c \
 				push_swap_engine.c push_swap_load.c push_swap_parsing.c \
-				push_swap_peculiar_cases.c push_swap_algos.c \
+				push_swap_peculiar_cases.c push_swap_algos.c markup_algo.c \
 				push_swap_untagged_manager.c order_stack.c move_location_to_target.c
 
 BONUS_SRC	=	visualizer_main.c \

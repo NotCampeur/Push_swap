@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 10:09:46 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/06 15:07:16 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/07 16:46:30 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void		order_stack(t_list_node **s_a, t_list_node **ops)
 	*s_a = tmp;
 	if (pos >= size_a / 2 + is_odd && pos != 0)
 		pos_is_near_end(s_a, ops, pos, size_a);
-	else
+	else if (pos != 0)
 		pos_is_near_start(s_a, ops, pos);
 }

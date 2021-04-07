@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 11:00:39 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/06 14:30:03 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/07 16:28:25 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,15 @@ void		push_untagged(t_list_node **s_a, t_list_node **s_b
 ** Will just iter through the stack and push the next smallest int.
 */
 void		rev_push_sort(t_system *sys);
+
+/*
+** Will decide which value will stay on stack A and which will go to B.
+*/
+void		nodes_markup(t_node **nodes, int data[3], int i, t_bool first_time);
+
+/*
+** Index each value with the target index
+*/
+void		index_stack_nodes(t_node **nodes, int size, int i);
 
 #endif

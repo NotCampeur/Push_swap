@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 17:53:46 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/01 15:06:55 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/07 12:02:25 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ t_list_node			*get_instructions(void)
 		ret = read(STDIN_FILENO, buf, 3);
 		if (is_a_valid_operation(buf) == true)
 			ft_list_add_back(&operations, ft_malloc_node(ft_strdup(buf)));
-		else
+		else if (ret != 0)
 		{
 			if (ret == 3 && read(STDIN_FILENO, buf + 3, 1) == 1
 						&& is_a_valid_operation(buf) == true)
 				ft_list_add_back(&operations, ft_malloc_node(ft_strdup(buf)));
-			else if (ret != 0)
+			else
 				return (incorrect_instruction(&operations, buf));
 		}
 		free(buf);

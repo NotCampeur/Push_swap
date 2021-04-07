@@ -6,13 +6,13 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:25:29 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/06 16:38:11 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/07 16:49:53 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_bool			is_sort(t_list_node *stack_a, t_list_node *stack_b)
+t_bool		is_sort(t_list_node *stack_a, t_list_node *stack_b)
 {
 	t_list_node	*tmp;
 
@@ -33,16 +33,14 @@ t_bool			is_sort(t_list_node *stack_a, t_list_node *stack_b)
 	return (true);
 }
 
-void			gen_instructions(t_system *sys)
+void		gen_instructions(t_system *sys)
 {
-	if (is_in_crescent_order(sys->s_a))
-		return ;
 	push_untagged(&sys->s_a, &sys->s_b, &sys->ops);
 	rev_push_sort(sys);
 	order_stack(&sys->s_a, &sys->ops);
 }
 
-void			send_instructions(t_list_node *operation)
+void		send_instructions(t_list_node *operation)
 {
 	t_list_node	*tmp;
 
@@ -55,7 +53,7 @@ void			send_instructions(t_list_node *operation)
 	operation = tmp;
 }
 
-void			quit(t_system *sys, int exit_nb)
+void		quit(t_system *sys, int exit_nb)
 {
 	if (sys->s_a != NULL)
 		ft_list_clear(&sys->s_a, free);
@@ -65,4 +63,15 @@ void			quit(t_system *sys, int exit_nb)
 		ft_list_clear(&sys->ops, NULL);
 	free(sys);
 	exit(exit_nb);
+}
+
+t_system	*system_init(void)
+{
+	t_system	*result;
+
+	result = (t_system*)malloc(sizeof(t_system));
+	result->s_a = NULL;
+	result->s_b = NULL;
+	result->ops = NULL;
+	return (result);
 }
