@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:28:03 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/04/07 18:01:39 by ldutriez         ###   ########.fr       */
+/*   Updated: 2021/04/08 10:16:36 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	is_true_and_swappable(t_list_node **s_a, t_list_node **ops
 		if (((t_node*)(*s_a)->data)->index
 										> ((t_node*)(*s_a)->next->data)->index
 		&& ((((t_node*)(*s_a)->next->data)->index > ((t_node*)tmp->data)->index)
-			|| (((t_node*)tmp->data)->index == (ft_list_size(*s_a))
+			|| (((t_node*)tmp->data)->index == (ft_list_size(*s_a) - 1)
 			&& ((t_node*)(*s_a)->next->data)->index == 0)))
 		{
 			((t_node*)(*s_a)->next->data)->tag = true;

@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/31 10:32:05 by ldutriez          #+#    #+#              #
-#    Updated: 2021/04/07 17:21:09 by ldutriez         ###   ########.fr        #
+#    Updated: 2021/04/08 10:28:57 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,14 @@
 
 MAX=0
 ITERATIONS=0
-LIMIT=12
-FILE=tester/problem_5
+LIMIT=5500
+FILE=tester/problem_500
 SUM=0
 
 echo "___Debug file___" > $FILE
-for i in {1..1000}
+for i in {1..100}
 do
-		./stack_gen 5 > stack.txt
+		./stack_gen 500 > stack.txt
 		ARG=$(cat stack.txt)
 		if ./push_swap $ARG | ./checker $ARG | grep -q KO
 		then
