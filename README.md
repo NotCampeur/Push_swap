@@ -16,9 +16,9 @@ In this repository you will find two programs to find and test a sorting algorit
 
 **ALGORITHM EXPLANATION**  
 It's a three time algorithm:
-> 1 : I parse the given stack and mark each digit, by doing so I'm able to tell which number will stay in stack A and whom will be pushed to B.  
-> 2 : I backtrack in stack B to select the best data to move accordingly to the number of operations needed.  
-> 3 : I rotate or reverse rotate until the smallest data is at the beginning of the list.
+* 1 : I parse the given stack and mark each digit, by doing so I'm able to tell which number will stay in stack A and whom will be pushed to B.  
+* 2 : I backtrack in stack B to select the best data to move accordingly to the number of operations needed.  
+* 3 : I rotate or reverse rotate until the smallest data is at the beginning of the list.
 
 **MAKEFILE GUIDE**  
 Thanks to the stack_gen rule you can generate a random list of NB numbers between INT_MIN and INT_MAX:  
