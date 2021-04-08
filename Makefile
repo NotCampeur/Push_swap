@@ -154,6 +154,7 @@ $(NAME2): 		libft/libft.a $(CHECKER_INC_DIR) $(CHECKER_OBJ) Makefile
 
 $(SDL_FILE):
 				@echo -n "-----\nInstalling $(_YELLOW)sdl2$(_WHITE) ... "
+				@echo "user42" | sudo -S echo "installing SDL"
 				@yes | sudo apt-get install libsdl2-2.0-0 libsdl2-gfx-1.0-0 libsdl2-net-2.0-0 libsdl2-ttf-dev
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 				
